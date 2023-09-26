@@ -1,0 +1,33 @@
+.wrapper{
+    margin-left: 11%;
+    display: flex;
+    margin-bottom: 1%;
+    gap: 3%;
+}
+.price{
+    display: flex;
+    padding: 10px;
+    gap: 3%;
+}
+.price_input {
+    width: 45px;
+    height: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 3%;
+}
+.form{
+    display: flex;
+    
+}
+
+.discount{
+    display: flex;
+    padding: 10px;
+    
+}
+
+.discount_input{
+    margin-left: 10px;
+    margin-top: 5px;
+}

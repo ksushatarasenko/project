@@ -1,0 +1,22 @@
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.wrapper{
+    margin: 50px 0;
+}
+.socMedia{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 20%;
+
+}
+.socMedia img {
+    width: 40px;
+}
+.line{
+    /* line-height: 4px; */
+}
+.text{
+    margin-top: 20px;
+}
