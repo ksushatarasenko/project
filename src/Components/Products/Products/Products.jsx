@@ -16,9 +16,7 @@ const Products = observer(() => {
  
   
   useEffect(() => {
-    console.log("Before setting products:", products);
     sortingStore.setProducts(products);
-    console.log("After setting products:", sortingStore.products);
     getAllProducts();
   }, []); 
 

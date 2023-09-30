@@ -2,6 +2,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .titleWrapper{
     display: flex;
@@ -29,5 +31,19 @@
 }
 .image{
     width: 318px;
-    height: 350px;
+    height: 340px;
+}
+
+.fourCategories{
+    display: flex;
+    gap: 34px;
+    margin: 0 auto;
+    /* border: 2px solid red; */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.titleP{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
 }

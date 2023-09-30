@@ -1,12 +1,12 @@
 import React from 'react'
+import PromotionHome from './PromotionHome'
 
 function Promotion() {
   return (
     <div>
-      <h1>Акции</h1>
+      <h1>Sale</h1>
       <div>
-        IMG
-        Hello
+        <PromotionHome/>
       </div>
     </div>
   )

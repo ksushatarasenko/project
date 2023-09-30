@@ -1,0 +1,56 @@
+.wrapper{
+    display: flex;
+    gap: 30px;
+    margin: 20px auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.imgContainer{
+    justify-content: center;
+}
+
+.cardProduct{
+    /* border: 2px solid blue; */
+    display: flex;
+    width: 318px;
+    /* height: 366px; */
+    flex-direction: column;
+}
+.sale{
+    margin-top: 5%;
+    font-size: 40px;
+    font-weight: 700;
+}
+.image{
+    width: 318px;
+    height: 276px;
+    /* border: 2px solid red; */
+}
+.price{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    align-items: flex-end;
+}
+.priceDiscount{
+    font-size: 30px;
+    font-weight: 600;
+}
+.priceProduct{
+    font-size: 20px;
+    font-weight: 500;
+    color: #8B8B8B;
+    text-decoration: line-through;
+}
+.pricePercent{
+    font-size: 20px;
+    font-weight: 600;
+    color: #FF32A1;
+}
+.title{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #3A3A3A;
+}

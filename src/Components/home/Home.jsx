@@ -1,18 +1,17 @@
-import React from 'react'
-
 import Footer from '../footer/Footer'
 import Sale from '../Sale/Sale'
 import Discount from '../discount/Discount'
-import Promotion from '../Promotion/Promotion'
-import Categories from '../Products/Categories/Categories'
+import FourCategiries from '../Products/Categories/FourCategiries'
+import PromotionHome from '../Promotion/PromotionHome'
 
-function Home() {
+const Home = () => {
+
   return (
     <div>
       <Sale/> 
-      <Categories/>
+      <FourCategiries/>
       <Discount/>
-      <Promotion/>
+      <PromotionHome/>
       <Footer/>
     </div>
   )
