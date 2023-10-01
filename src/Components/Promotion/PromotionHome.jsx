@@ -7,7 +7,7 @@ function PromotionHome() {
 
   useEffect(() => {
     getAllProducts();
-  });
+  }, [getAllProducts]);
 
   const saleProducts = products.filter((product) => product.discont_price);
   const saleProductHome = saleProducts.slice(0, 4);

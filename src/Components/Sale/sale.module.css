@@ -17,18 +17,22 @@
     font-weight: 700;
 }
 
-.wrapper button{
+.btn{
     background-color: white;
     width: 155px;
     height: 82px;
     border-radius: 13px;
-    padding: 25px 50px;
-    font-size: 25px;
-    font-weight: 700;
+    padding: 25px 50px; 
     border: none;
-    color: #2D2D2D;
     margin-bottom: 139px;
     margin-top: 60px;
+    
+}
+.btn a{
+    text-decoration: none; 
+    color:  #2D2D2D;
+    font-size: 25px;
+    font-weight: 700;
 }
 .text{
     margin-top: 130px;

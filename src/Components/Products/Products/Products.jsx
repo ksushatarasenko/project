@@ -36,18 +36,18 @@ const Products = observer(() => {
               <div className={prod.price}>
                 {product.discont_price ? (
                   <>
-                    <p className={prod.price}>{product.discont_price} $</p> 
+                    <p className={prod.priceProduct}>{product.discont_price} $</p> 
                     <p className={prod.noPrice}>{product.price} $</p>
                     <p className={prod.discount}>{((product.price-product.discont_price)*100/product.price).toFixed(0)} %</p>
                   </>
                 ) : <p>{product.price} $</p>}
               </div>
-
-              <Link to={`/products/${product.id}`} className={prod.title}>
-                {product.title}
-              </Link>
-            
-              
+              <div className={prod.link}>
+                <Link to={`/products/${product.id}`} className={prod.title}>
+                  {product.title}
+                </Link>   
+              </div>
+                       
             </div>
           ))
         )}

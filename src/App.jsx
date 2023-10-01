@@ -9,6 +9,7 @@ import Product from './Components/Products/Products/Product';
 import Home from './Components/home/Home';
 import './app.css'
 import NotFound from './Components/notFound/NotFound';
+import Promotion from './Components/Promotion/Promotion';
 
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
           <Route path='/products/:idProd' element={<Product/>}/>
           <Route path='/categories/all' element={<Categories />} />
           <Route path='/categories/:id' element={<SingleCategories/>}/>
-          {/* <Route path='/discount' element={<Discount />} />
           <Route path='/promotion' element={<Promotion/>}/>
+          {/* <Route path='/discount' element={<Discount />} />
           <Route path='/contact' element={<Footer />} /> */}
           <Route path='/order' element={<Order />} />
           <Route path='*' element={<NotFound/>}/>
