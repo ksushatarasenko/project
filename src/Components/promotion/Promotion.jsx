@@ -3,7 +3,8 @@ import allProducts from '../../store/allProducts';
 import promo from './promotion.module.css'
 import { Link } from 'react-router-dom';
 
-function Promotion() {
+
+function Promotion({limit}) {
   const {products, isLoading, getAllProducts} = allProducts;
 
   useEffect(() => {
@@ -12,13 +13,14 @@ function Promotion() {
 
   const saleProducts = products.filter((product) => product.discont_price);
 
-  return (<div>
+  return (
+  <div>
     <h2 className={promo.sale}>Sale</h2>
     {isLoading ? (
       <p>Loading...</p>
     ) : (
       <div className={promo.wrapper}>
-        {saleProducts.map((product) => (
+        {saleProducts.slice(0,limit).map((product) => (
           <div key={product.id} className={promo.cardProduct}>
             <div className={promo.imgContainer}>
               <img 

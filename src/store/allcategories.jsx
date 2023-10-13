@@ -24,5 +24,4 @@ class AllCategories {
 }
 
 const allCategories = new AllCategories();
-
 export default allCategories;

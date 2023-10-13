@@ -5,30 +5,7 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-.titleWrapper{
-    display: flex;
-    gap: 100px;
-    align-items: center;
-    margin-top: 20px;
-}
-.title{
-    font-size: 40px;
-    font-weight: 700;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 20px;
-}
-.btn{
-    width: 120px;
-    height: 30px;
-    
-   
-}
-.btn a{
-    text-decoration: none;
-    color: #8B8B8B;
-    font-size: 12px;
-}
+
 .image{
     width: 318px;
     height: 340px;
@@ -46,4 +23,16 @@
     font-size: 18px;
     text-align: center;
     font-weight: 600;
+    margin-left: 40%;
+}
+
+.link a{
+    text-decoration: none;
+}
+
+@media (max-width: 420px){
+    .image{
+        width: 118px;
+        height: 120px;
+    }
 }

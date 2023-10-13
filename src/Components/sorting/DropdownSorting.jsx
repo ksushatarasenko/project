@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import sortingStore from '../../store/sortingStore'
+import sortingStore from '../../store/sorting/sortingStore'
 import sort from './sorting.module.css'
 
 
@@ -18,8 +18,8 @@ const DropdownSorting = observer(() => {
   return (
     <div className={sort.price}>
         <h3>Sorted </h3>
-        <select name="sortType" onChange={handleSortChange}>
-            <option value="">Сортировать по ...</option>
+        <select name="sortType" onChange={handleSortChange} className={sort.select}>
+            <option value="" className={sort.option}>Сортировать по ...</option>
             <option value={sortByPrice}>Цена по убыванию</option>
             <option value="priceAscending">Цена по возрастанию</option>
             <option value={sortByName}>Название А-Я</option>

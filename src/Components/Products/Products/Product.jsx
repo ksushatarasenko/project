@@ -2,19 +2,32 @@
 import { observer } from 'mobx-react-lite'; 
 import singleProduct from '../../../store/singleProduct';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import cardProd from './singleProduct.module.css'
 import Footer from '../../footer/Footer';
-
+import cartStore from '../../../store/cartStore/cartStore'
+import CartItem from '../../order/CartItem';
 
 const Product = observer(() => {
-  const { idProd } = useParams(); 
-  const { product, isLoading } = singleProduct;
+  const { id } = useParams(); 
+  const { product, isLoading} = singleProduct;
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isAddToCart, setIsAddToCart] = useState(false);
+
+  const handleAddToCart = (product) => {
+    setSelectedProduct(product)
+    cartStore.addItem(product);
+    setIsAddToCart(true);
+  }
 
   useEffect(() => {
-    singleProduct.getAllProduct(idProd);
-  }, [idProd]);
- console.log(product)
+    singleProduct.getAllProduct(id);
+  }, [id]);
+
+ console.log(id)
+ 
+
+
   return (
     <div>
       {isLoading ? (
@@ -24,7 +37,10 @@ const Product = observer(() => {
             <div key={product.id} >
                 <h2 className={cardProd.title}>{product.title}</h2>
                 <div className={cardProd.wrapper}>
-                    <img src={`http://localhost:3333/${product.image}`} alt={product.id} className={cardProd.image}/>
+                    <img 
+                      src={`http://localhost:3333/${product.image}`} 
+                      alt={product.id} 
+                      className={cardProd.image}/>
                     <div className={cardProd.container_text}>
                         <div className={cardProd.price_container}>
 
@@ -37,7 +53,11 @@ const Product = observer(() => {
                                 ) : <p className={cardProd.price}>{product.price} <span className={cardProd.valuts}>$</span> </p>}      
                         </div>
                         
-                        <button className={cardProd.btn}>To cart</button>
+                        <button 
+                          className={cardProd.btn} 
+                          onClick={() => handleAddToCart(product)}>To cart
+                        </button>
+                        
                         <div className={cardProd.line}></div>
                         <p className={cardProd.description}>{product.description}</p>
                     </div>
@@ -47,6 +67,9 @@ const Product = observer(() => {
             )))     
       )}
       <Footer/>
+      {isAddToCart && setIsAddToCart && <CartItem />}
+     
+      
     </div>
   );
 });

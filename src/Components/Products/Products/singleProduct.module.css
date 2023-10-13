@@ -23,6 +23,12 @@
     border: none;
     font-size: 18px;
     padding: 25px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(0.95);
+    background-color: green;
 }
 .container_text{
     width: 30%;

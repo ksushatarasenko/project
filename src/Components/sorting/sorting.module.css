@@ -1,16 +1,17 @@
 .wrapper{
-    margin-left: 11%;
+    margin-left: 10%;
     display: flex;
     margin-bottom: 1%;
-    gap: 3%;
+    gap: 8%;
+    /* border: 2px solid green; */
 }
 .price{
     display: flex;
     padding: 10px;
-    gap: 3%;
+    gap: 5%;
 }
 .price_input {
-    width: 45px;
+    width: 103px;
     height: 15px;
     border-radius: 5px;
     padding: 5px;
@@ -30,4 +31,62 @@
 .discount_input{
     margin-left: 10px;
     margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    /* border: 2px solid red; */
+}
+.h3{
+    font-size: 20px;
+    font-weight: 600;
+}
+.option{
+    border-radius: 5px;
+}
+.discount_form{
+    width: 40px;
+    /* display: flex;
+    align-items: flex-end; */
+}
+.select{
+    border-radius: 5px;
+    width: 220px;
+    height: 40px;
+}
+@media (max-width:1060px){
+    .wrapper{
+        gap: 2%;
+    }
+    .form{
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+@media (max-width:780px){
+    .wrapper{
+        flex-direction: column;
+    }
+    .form{
+        flex-direction: row;
+        /* gap: 5px; */
+    }
+}
+@media (max-width:380px){
+    .form{
+        flex-direction: column;
+        /* gap: 5px; */
+    }
+}
+@media (max-width:290px){
+    .price{
+        flex-direction: column;
+    }
+    .select{
+        width: 80%;
+        height: 40px;
+    }
+    .discount_form{
+        display: flex;
+        align-items: flex-end;
+    }
 }

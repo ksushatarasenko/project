@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'; 
 import header from './Components/header/header.module.css'
 import order from './Components/header/images/icons8-shopping_bag 1.png'
+import cartStore from './store/cartStore/cartStore';
+import { observer } from 'mobx-react-lite';
 
-function Nav() {
+const Nav = observer(() => {
   return (
     <nav className={header.nav}>
           <Link to='/'>Main Page</Link>
@@ -12,11 +14,17 @@ function Nav() {
           <div className={header.order}>
             <Link to='/order'>
               <img src={order} alt="order" />
-            </Link>  
+            </Link> 
+            {cartStore.totalCount > 0 ? (
+              <p>Items in cart: {cartStore.totalCount}</p>
+            ) : (
+              <p>Your cart is empty</p>
+            )}
+            
           </div>
           
       </nav>
   )
-}
+})
 
 export default Nav

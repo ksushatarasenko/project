@@ -1,17 +1,31 @@
 import Footer from '../footer/Footer'
-import Sale from '../Sale/Sale'
+import Sale from '../sale/Sale'
 import Discount from '../discount/Discount'
-import FourCategiries from '../Products/Categories/FourCategiries'
-import PromotionHome from '../Promotion/PromotionHome'
+import { Link} from 'react-router-dom'
+import Promotion from '../promotion/Promotion'
+import Categories from '../Products/Categories/Categories'
+import home from './home.module.css'
+import Header from '../header/Header'
+// import FourProducts from '../Products/Products/FourProducts'
+
 
 const Home = () => {
-
+  
   return (
     <div>
+      {/* <Header/> */}
       <Sale/> 
-      <FourCategiries/>
+      <div className={home.categoriesWrapper}>
+        <div className={home.titleWrapper}>
+          <h1 className={home.title}>Catalog</h1>
+            <button className={home.btn}>
+                <Link to='/categories/all'>All catalog</Link>
+            </button>
+        </div>
+        <Categories limit={4}  />
+      </div>
       <Discount/>
-      <PromotionHome/>
+      <Promotion limit={4}/>
       <Footer/>
     </div>
   )

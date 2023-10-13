@@ -2,9 +2,11 @@
 import {makeAutoObservable} from 'mobx'
 import axios from 'axios'
 
+
 class AllProducts {
     products = [];
     isLoading = false;
+    
 
     constructor() {
         makeAutoObservable(this);
@@ -22,6 +24,7 @@ class AllProducts {
             this.isLoading = false;
         }
       }
+    
 }
 
 const allProducts = new AllProducts();

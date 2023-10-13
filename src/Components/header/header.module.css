@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
 }
+/* ================ */
 .logo{
     width: 70px;
     display: flex;
@@ -14,13 +15,13 @@
     width: 125px;
     height: 50px;
     border-radius: 5px;
-    /* cursor: pointer; */
     border: none;
 }
 .btn:hover {
     background-color: darkgreen; 
     cursor: pointer;
 }
+
 .btn a{
     font-size: 16px;
     color: #FFFFFF;
@@ -28,6 +29,8 @@
     padding: 14px 30px 15px;
     cursor: pointer;
 }
+
+/* ============ navigate menu base ============== */
 
 .nav{
     display: flex;
@@ -45,45 +48,89 @@
     color: black;
     font-weight: 500;
     cursor: pointer;
+    /* border: 2px solid green */
+}
+.nav a:hover{
+    transform: scale(1.15);
 }
 .order{
     margin-left: 150px;
 }
 
-.burger_menu {
+/* ============ burger menu ============== */
+.burger_icon img{
+    width: 50px;
+    height: 50px;
+}
+.burger_icon img:hover{
+    transform: scale(1.2);
+}
+.burger_menu_container {
     display: none; 
-    flex-direction: column;
+    cursor: pointer;
   }
-
+/* ==================== */
+.navbar{
+    opacity:0;
+    transition:  opacity 0.4s;
+    width: 100px;
+}
+.navbar.show{
+    opacity:1;
+}
 
 @media (max-width: 860px) {
     .order {
-        margin-left: 0; /* Значение при ширине экрана <= 833px */
+        margin-left: 0; 
     }
 }
 @media (max-width: 716px) {
     .nav {
       display: none;
     }  
-    .burger_menu{
-    display: block;
-    align-items: center;
-    display: flex;
-    margin-top: 3%;
-    font-size: 16px;
-    font-weight: 500;
-    gap: 7px;
-    
-  }
+    .burger_menu_container{
+        align-items: center;
+        display: flex;
+        width: 50%;
+        margin-top: 3%;
+        font-size: 16px;
+        font-weight: 500;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+  
   .burger_menu a{
     text-decoration: none;
     color: black;
     display: flex;
+    font-size: 14px;
+    padding: 4%;
+    
   }
-}
+  .wrapper{
+    justify-content: normal;
+    gap: 15%;
+    margin-bottom: 10%;
+  }
 
+}
+@media (max-width: 470px){
+    .wrapper{
+        flex-direction: column;
+        
+    }
+    .burger_menu{
+        margin-left: 5%;
+        flex-direction: column;
+    }
+    .burger_menu_container{
+        width: 95%;
+        
+    }
+}
 @media (max-width: 360px){
     .logo{
         flex-direction: column;
+        
     }
 }

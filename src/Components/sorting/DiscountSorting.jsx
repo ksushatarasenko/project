@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import sortingStore from '../../store/sortingStore'
+import sortingStore from '../../store/sorting/sortingStore'
 import sort from './sorting.module.css'
 
 const DiscountSorting = observer(() => {
@@ -10,8 +10,12 @@ const DiscountSorting = observer(() => {
     
     <div className={sort.discount}>
         <h3>Discounted items: </h3>
-        <form >
-            <input type="checkbox" checked={showDiscount} onChange={changeDiscounted} className={sort.discount_input} />
+        <form className={sort.discount_form}>
+            <input 
+              type="checkbox" 
+              checked={showDiscount} 
+              onChange={changeDiscounted} 
+              className={sort.discount_input} />
         </form>
     </div>
   )
