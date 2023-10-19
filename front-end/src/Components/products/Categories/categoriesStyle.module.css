@@ -1,0 +1,42 @@
+.wrapper{
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.item{
+    margin-top: 5%;
+}
+.image{
+    width: 318px;
+    height: 340px;
+}
+
+.fourCategories{
+    display: flex;
+    gap: 34px;
+    margin: 0 auto;
+    /* border: 2px solid red; */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.titleP{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    margin-left: 40%;
+}
+
+.link a{
+    text-decoration: none;
+}
+
+@media (max-width: 420px){
+    .image{
+        width: 118px;
+        height: 120px;
+    }
+}
