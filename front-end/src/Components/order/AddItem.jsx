@@ -6,9 +6,11 @@ import cartStore from '../../store/cartStore/cartStore'
 const AddItem = observer(() => {
   const product = cartStore.getSelectItems();
   
+//    карточка с товаром
   return (
-    <div>
-      <div className={order.wrapper}>
+   
+      <div>
+            {/* <hr className={order.line}/> */}
             {cartStore.isLoading ? (
                 <p>Loading ... </p>
             ) : (
@@ -19,8 +21,7 @@ const AddItem = observer(() => {
                             <img src={`http://localhost:3333/${item.product.image}`} alt="" />
                         </div>
 
-                        <div className={order.title_counter}>
-                            
+                        <div className={order.title_counter}>                           
                             <p className={order.title}>{item.product.title}</p>
                             <div className={order.count}>
                                 <p onClick={() => cartStore.decrement(item.product.id)}
@@ -28,8 +29,7 @@ const AddItem = observer(() => {
                                 <p> {item.quantity}</p>
                                 <p className={order.minus}
                                     onClick={() => cartStore.increment(item.product.id)}>+</p>
-                            </div>
-                        
+                            </div>                       
                         </div>
 
                         <div className={order.block_price}>
@@ -42,23 +42,21 @@ const AddItem = observer(() => {
                                     {item.product.discont_price && (
                                 <p className={order.discount_price}>{item.product.discont_price}$</p>
                                     )}
-                            </div>
-                            <div 
-                                onClick={() => cartStore.removeItem(item.product.id)}          
-                                className={order.delete}><p>X</p>
-                            </div>
+                            </div>                          
                         </div>
-                    </div>
-                    <hr />
-                    {/* <div className={order.line}></div> */}
-                    
+
+                        <div onClick={() => cartStore.removeItem(item.product.id)}          
+                                className={order.delete}>
+                            <p>X</p>
+                        </div>
+
+                        <hr className={order.line}/> 
+                    </div>                                      
                 </div>
                 ))
-            )}
-            
-            </div>
-
-    </div>
+            )}           
+        </div>
+    
   )
 })
 

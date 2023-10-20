@@ -1,28 +1,27 @@
 
 import { observer } from 'mobx-react-lite'; 
-import singleProduct from '../../../store/singleProduct';
+import productsStore from '../../../store/productsStore';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cardProd from './singleProduct.module.css'
-import Footer from '../../footer/Footer';
 import cartStore from '../../../store/cartStore/cartStore'
-import CartItem from '../../order/CartItem';
+
 
 const Product = observer(() => {
   const { id } = useParams(); 
-  const { product, isLoading} = singleProduct;
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isAddToCart, setIsAddToCart] = useState(false);
+  const { singleProduct, isLoading, getSingleProduct} = productsStore;
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [isAddToCart, setIsAddToCart] = useState(false);
 
   const handleAddToCart = (product) => {
-    setSelectedProduct(product)
+    // setSelectedProduct(product)
     cartStore.addItem(product);
-    setIsAddToCart(true);
+    // setIsAddToCart(true);
   }
 
   useEffect(() => {
-    singleProduct.getAllProduct(id);
-  }, [id]);
+    getSingleProduct(id);
+  }, []);
 
  console.log(id)
  
@@ -33,14 +32,18 @@ const Product = observer(() => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-            (product.map((product) => (
+            (singleProduct.map((product) => (
             <div key={product.id} >
                 <h2 className={cardProd.title}>{product.title}</h2>
                 <div className={cardProd.wrapper}>
+                 
                     <img 
                       src={`http://localhost:3333/${product.image}`} 
                       alt={product.id} 
-                      className={cardProd.image}/>
+                      className={cardProd.image}
+                      />
+                    
+                                
                     <div className={cardProd.container_text}>
                         <div className={cardProd.price_container}>
 
@@ -66,8 +69,7 @@ const Product = observer(() => {
             </div>   
             )))     
       )}
-      <Footer/>
-      {isAddToCart && setIsAddToCart && <CartItem />}
+      {/* {isAddToCart && setIsAddToCart && <CartItem />} */}
      
       
     </div>

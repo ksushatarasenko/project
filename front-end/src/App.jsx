@@ -8,8 +8,9 @@ import Home from './Components/home/Home';
 import './app.css'
 import NotFound from './Components/notFound/NotFound';
 import SingleCategory from './Components/products/Categories/SingleCategory';
-import PageCategories from './Components/products/Categories/PageCategories';
-import PagePromotion from './Components/promotion/PagePromotion';
+import Footer from './Components/footer/Footer';
+import Categories from './Components/products/Categories/Categories';
+import Promotion from './Components/promotion/Promotion';
 
 
 function App() {
@@ -21,12 +22,13 @@ function App() {
           <Route path='/' element={<div><Home /></div>} />
           <Route path='/products/all' element={<Products/>} />
           <Route path='/products/:id' element={<Product/>}/>
-          <Route path='/categories/all' element={<PageCategories/>} />
+          <Route path='/categories/all' element={<Categories/>} />
           <Route path='/categories/:id' element={<SingleCategory/>}/>
-          <Route path='/promotion' element={<PagePromotion/>}/>
+          <Route path='/promotion' element={<Promotion/>}/>
           <Route path='/order' element={<Order />} />
           <Route path='*' element={<NotFound/>}/>
         </Routes>
+        <Footer/>
       </Router>
     </div>
   );

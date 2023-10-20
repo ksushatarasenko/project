@@ -1,30 +1,29 @@
 import React, { useEffect } from 'react';
-import allCategories from '../../../store/allcategories'; 
+import productsStore from '../../../store/productsStore'; 
 import categor from './categoriesStyle.module.css';
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
-// import Footer from '../../footer/Footer'
-// import FourProducts from '../Products/FourProducts';
+
 
 const Categories = observer(({limit}) => {
-  const {categories, isLoading, getAllCategories} = allCategories;
+  const {allCategories, isLoading, getAllCategories} = productsStore;
 
   useEffect(() => {
     getAllCategories(); 
-  }, [getAllCategories]);
+  }, []);
 
   return (
-    <>
+    
       <div  >
         {isLoading ? (
           <p>Loading ....</p>
         ) : (
           <div className={categor.wrapper}>
-            {categories.slice(0, limit).map((categorie) => (
+            {allCategories.slice(0, limit).map((categorie) => (
               <div key={categorie.id}  className={categor.item}>
                 <img src={`http://localhost:3333/${categorie.image}`} alt={categorie.id} className={categor.image}/>
                 <div className={categor.link}>
-                  <Link to={`/categories/${categorie.id}`} className={categor.titleP}>{categorie.title}</Link>
+                  <Link to={`/categories/${categorie.id}`} className={categor.titleP} >{categorie.title} </Link>
                 </div>
                 
               </div>
@@ -32,10 +31,9 @@ const Categories = observer(({limit}) => {
           </div>
         )
         }
-      </div>
-      
-    </>
-    
+       
+       
+      </div>    
   );
 });
 

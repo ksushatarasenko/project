@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import sortingStore from '../../store/sorting/sortingStore'
 import sort from './sorting.module.css'
-import allProducts from '../../store/allProducts'
+import allProducts from '../../store/productsStore'
 
 
 const DropdownSorting = observer(() => {
@@ -25,7 +25,7 @@ const DropdownSorting = observer(() => {
         }
         console.log(option)
         setTimeout(() => {
-            setSelectOption(option); // Сброс выбора
+            setSelectOption(option); 
         }, 100);
     }
 

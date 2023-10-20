@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import sortingStore from '../../store/sorting/sortingStore'
-import allProducts from '../../store/allProducts'
+import allProducts from '../../store/productsStore'
 import {observer} from 'mobx-react-lite'
 import sort from './sorting.module.css'
 

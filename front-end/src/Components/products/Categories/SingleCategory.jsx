@@ -1,29 +1,43 @@
 
 import React, {useEffect} from 'react'
-import singleCategory from '../../../store/singleCategories';
+import productsStore from '../../../store/productsStore';
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import prod from '../Products/products.module.css'
 import { Link } from 'react-router-dom';
-// import sortingStore from '../../../store/sortingStore';
 import sort from '../../sorting/sorting.module.css'
 import SortingPrice from '../../sorting/SortingPrice';
 import DiscountSorting from '../../sorting/DiscountSorting';
 import DropdownSorting from '../../sorting/DropdownSorting';
-import Footer from '../../footer/Footer'
+import cartStore from '../../../store/cartStore/cartStore';
+
+
 
 const SingleCategory = observer(() => {
   const {id} = useParams();
-  const {category, isLoading} = singleCategory;
+  const {singleCategory, isLoading,allCategories} = productsStore;
+
+  const handleAddToCart = (product) => {
+    cartStore.addItem(product);
+  }
 
   useEffect(() => {
-    singleCategory.getSingleCategory(id);
+    productsStore.getSingleCategory(id);
   }, [id]);
 
-console.log(id)
+  useEffect(() => {
+    productsStore.getAllCategories()
+  }, [])
 
+  const findCategories = allCategories.filter(category => (category.id) == id);
+  
   return (
     <div>
+        {findCategories[0] ? (
+          <h1 className={prod.h1}> <span className={prod.span}>Category </span> {findCategories[0].title}</h1>
+        ) : (
+          isLoading && <p>Loading...</p>
+        )}
       <div className={sort.wrapper}>
         {<SortingPrice/>}
         {<DiscountSorting/>}
@@ -31,9 +45,22 @@ console.log(id)
       </div>
       <div className={prod.wrapper}>
         {isLoading ? (<p>Loading...</p>) : 
-        (category.map((product) => (
+        (singleCategory.map((product) => (
+          
             <div key={product.id} className={prod.card}>
-              <img src={`http://localhost:3333/${product.image}`} alt={product.id} className={prod.image} />
+              
+              <div className={prod.image} >
+                  <Link to={`/products/${product.id}`}>
+                      <img 
+                        src={`http://localhost:3333/${product.image}`} 
+                        alt={product.id} 
+                        />          
+                  </Link>  
+                  
+                    <button className={prod.btn} 
+                    onClick={() => handleAddToCart(product)}
+                    >To cart</button>
+              </div>
            
               <div className={prod.price}>
                 {product.discont_price ? (
@@ -54,7 +81,6 @@ console.log(id)
           ))
         )}
       </div>
-      <Footer/>
     </div>
   );
       
