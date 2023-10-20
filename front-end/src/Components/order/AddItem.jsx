@@ -5,12 +5,18 @@ import cartStore from '../../store/cartStore/cartStore'
 
 const AddItem = observer(() => {
   const product = cartStore.getSelectItems();
+
+  const suma = (price, count) => {
+    let total = price*count
+    return total.toFixed(2)
+  }
+
   
-//    карточка с товаром
+//    карточка с товаром в корзине
   return (
    
       <div>
-            {/* <hr className={order.line}/> */}
+            
             {cartStore.isLoading ? (
                 <p>Loading ... </p>
             ) : (
@@ -34,13 +40,23 @@ const AddItem = observer(() => {
 
                         <div className={order.block_price}>
                             <div className={order.price}>
-                                <p className={order.price_p}> 
-                                    {item.product.price} 
-                                    <span
-                                        className={order.price_dollar}>$</span>
-                                </p>
+                                {item.product.discont_price === null ? (
+                                    <p className={order.price_p}> 
+                                        {suma(item.product.price, item.quantity)}
+                                        <span
+                                            className={order.price_dollar}>$</span>
+                                    </p>
+                                ) : (
+                                    <p className={order.price_p}> 
+                                        {suma(item.product.discont_price, item.quantity)}
+                                        <span
+                                            className={order.price_dollar}>$</span>
+                                    </p>
+                                )}
+                                
                                     {item.product.discont_price && (
-                                <p className={order.discount_price}>{item.product.discont_price}$</p>
+                                        <p className={order.discount_price}>
+                                            {suma(item.product.price, item.quantity)}$</p>
                                     )}
                             </div>                          
                         </div>

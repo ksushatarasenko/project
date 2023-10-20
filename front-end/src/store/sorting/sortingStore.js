@@ -73,9 +73,6 @@ setSortNameToDown = (products) => {
     let sortedProducts = [...this.products]
     console.log(sortedProducts)
 
-   
-    // sortedProducts = (this.showDiscount) ? (sortedProducts.filter((product) => product.discont_price !== null)) : sortedProducts 
-
     if(this.showDiscount){
         sortedProducts = sortedProducts.filter((product) => product.discont_price !== null)
     }
@@ -92,9 +89,6 @@ setSortNameToDown = (products) => {
         sortedProducts = sortedProducts.filter(product => product.price >= this.data.minPrice && product.price <= this.data.maxPrice)
     }
     
-  
-    // sortedProducts = (this.data.minPrice > 0 || this.data.maxPrice > 0) ? (sortedProducts.filter(product => product.price >= this.data.minPrice && product.price <= this.data.maxPrice)) : sortedProducts
-
     sortedProducts.sort((a, b) => {
                     if (this.sortPriceToLower) {
                         return b.price - a.price;
@@ -112,12 +106,8 @@ setSortNameToDown = (products) => {
     this.sortedProducts = sortedProducts
 
     } 
-
-
     
 }
-
-
 
 const sortingStore = new SortingStore();
 

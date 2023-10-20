@@ -47,9 +47,6 @@ class ProductsStore {
       try {
         const responce = await axios.get('http://localhost:3333/categories/all');
         this.allCategories = responce.data;
-        console.log(this.allCategories)
-        console.log(this.allCategory)
-
       } catch (err) {
         console.error('Loading...', err);
       } finally {
@@ -62,7 +59,6 @@ class ProductsStore {
       try {
         const response = await axios.get(`http://localhost:3333/categories/${id}`)
         this.singleCategory = response.data.data;
-        console.log(this.singleCategory)
       } catch (error) {
         console.error("Loading error ...", error);
       } finally {

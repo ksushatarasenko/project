@@ -1,5 +1,4 @@
 import React from 'react'
-import not from './notfound.module.css'
 import notFound from './notFound.png'
 
 function NotFound() {

@@ -25,7 +25,7 @@ const DropdownSorting = observer(() => {
         }
         console.log(option)
         setTimeout(() => {
-            setSelectOption(option); 
+            setSelectOption(option); // Сброс выбора
         }, 100);
     }
 

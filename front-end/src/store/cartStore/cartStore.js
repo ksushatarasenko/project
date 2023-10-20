@@ -1,17 +1,18 @@
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
+
 
 class CartStore {
   items = [];
   totalCount = 0;
   isLoading = false;
   amountPrice = 0;
-
+  
 
   constructor() {
     makeAutoObservable(this);
     this.loadLocalStorage();
-    // this.calculateTotalCount();
-    // this.amountOrderPrice();
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   addItem(product) {
@@ -88,6 +89,24 @@ class CartStore {
     }
       this.isLoading = false;
     } 
+
+   async placeOrder () {    
+    this.isLoading = true;
+    
+   try {
+      const response = await axios.post('http://localhost:3333/order/send', this.items);
+      this.orderInfo = response.data;
+      console.log("Успешный ответ от сервера:", response.data);
+      } catch (error) {
+        console.error("Error placing order: ", error);
+        console.error("Ошибка при отправке POST запроса:", error);
+      } finally {
+          this.isLoading = false;
+          localStorage.clear();
+          window.location.reload();// для перезагрузки страницы
+          console.log(this.items)
+      }
+    }
   }
 
 
