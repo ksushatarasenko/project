@@ -1,30 +1,42 @@
 import React from 'react'
-import { Link } from 'react-router-dom'; 
+import { NavLink } from 'react-router-dom'; 
 import header from './Components/header/header.module.css'
 import order from './Components/header/images/icons8-shopping_bag 1.png'
 import cartStore from './store/cartStore/cartStore';
 import { observer } from 'mobx-react-lite';
+import './app.css'
 
 
 const Nav = observer(() => {
   return (
-    <nav className={header.nav}>
-          <Link to='/'>Main Page</Link>
-          <Link to='/products/all' >All products</Link>
-          <Link to='/promotion'>All salies</Link>
-          <div className={header.order}>
-            <Link to='/order'>
-              <img src={order} alt="order" />
-            </Link> 
-            {cartStore.totalCount > 0 ? (
-              <p>Items in cart: {cartStore.totalCount}</p>
-            ) : (
-              <p>Your cart is empty</p>
-            )}
+    <nav >
+      <div className={header.menu}>
+
+        <div className={header.nav}>
+          <NavLink to='/' className={({isActive})=> isActive ? 'active' : ''}>Main Page</NavLink>
+          <NavLink to='/products/all' className={({isActive})=> isActive ? 'active' : ''}>All products</NavLink>
+          <NavLink to='/promotion' className={({isActive})=> isActive ? 'active' : ''}>All salies</NavLink>
+        </div>
+        
+        <div className={header.order}>
+          <NavLink to='/order'>
+            <div className='cart'>
+                <img src={order} alt="order" className={({isActive})=> isActive ? 'active' : ''}/>
+                <div>
+                  {cartStore.totalCount > 0 ? (
+                  <p className='cart_p'>Items  in cart: {cartStore.totalCount}</p>
+                  ) : (
+                    <p>Your cart is empty</p>
+                  )}
+                </div>
+                
+            </div>
             
-          </div>
-          
-      </nav>
+          </NavLink>    
+        </div>
+
+      </div>
+    </nav>
   )
 })
 

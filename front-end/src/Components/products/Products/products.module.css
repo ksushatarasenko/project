@@ -30,9 +30,12 @@
     display: flex;
     width: 319px;
     height: 276px;position: relative;
-    /* border: 2px solid red; */
     justify-content: center;
+    transition: transform 1s ease;
+}
 
+.image:hover{
+    transform: scale(1.1);    
 }
 
 .image img{

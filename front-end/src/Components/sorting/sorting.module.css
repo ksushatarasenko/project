@@ -3,12 +3,13 @@
     display: flex;
     margin-bottom: 1%;
     gap: 8%;
-    /* border: 2px solid green; */
 }
 .price{
     display: flex;
     padding: 10px;
     gap: 5%;
+    align-items: center;
+
 }
 .price_input {
     width: 103px;
@@ -21,33 +22,65 @@
     display: flex;
     
 }
-
-.discount{
+/* ====== checkbox ============== */
+.checkbox{
     display: flex;
-    padding: 10px;
+    align-items: center;
+}
+.label{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 5%;
     
 }
 
-.discount_input{
-    margin-left: 10px;
-    margin-top: 5px;
+.fake{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid gray;
+    transition: 1s;
+    border-radius: 5px;
+    position: relative;
+}
+.fake::after{
+    content: '';
+    position: absolute;
+    display: block;
     width: 20px;
     height: 20px;
-    border-radius: 5px;
-    /* border: 2px solid red; */
+    background: url("check.svg") no-repeat;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+   
 }
+.input{
+    display: none;
+
+}
+.input:checked + .fake::after{
+    opacity: 1;
+}
+.input:checked + .fake{
+    background-color: green;
+
+}
+
+/* ======= end checkbox ====== */
+
 .h3{
     font-size: 20px;
     font-weight: 600;
 }
 .option{
     border-radius: 5px;
+    border-radius: 20px;
 }
-.discount_form{
-    width: 40px;
-    /* display: flex;
-    align-items: flex-end; */
-}
+
 .select{
     border-radius: 5px;
     width: 220px;
@@ -57,10 +90,10 @@
     .wrapper{
         gap: 2%;
     }
-    .form{
+    /* .form{
         flex-direction: column;
         gap: 5px;
-    }
+    } */
 }
 @media (max-width:780px){
     .wrapper{
@@ -70,6 +103,7 @@
         flex-direction: row;
         /* gap: 5px; */
     }
+    
 }
 @media (max-width:380px){
     .form{

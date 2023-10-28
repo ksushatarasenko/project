@@ -5,17 +5,17 @@ import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import prod from '../Products/products.module.css'
 import { Link } from 'react-router-dom';
-import sort from '../../sorting/sorting.module.css'
-import SortingPrice from '../../sorting/SortingPrice';
-import DiscountSorting from '../../sorting/DiscountSorting';
-import DropdownSorting from '../../sorting/DropdownSorting';
 import cartStore from '../../../store/cartStore/cartStore';
+import SortContiner from '../../sorting/SortContainer';
+import sortingStore from '../../../store/sorting/sortingStore';
 
 
 
 const SingleCategory = observer(() => {
   const {id} = useParams();
   const {singleCategory, isLoading,allCategories} = productsStore;
+  const {sortedProducts} = sortingStore;
+  // console.log(sortedProducts)
 
   const handleAddToCart = (product) => {
     cartStore.addItem(product);
@@ -23,14 +23,16 @@ const SingleCategory = observer(() => {
 
   useEffect(() => {
     productsStore.getSingleCategory(id);
+    
   }, [id]);
 
-  useEffect(() => {
-    productsStore.getAllCategories()
-  }, [])
-
   const findCategories = allCategories.filter(category => (category.id) == id);
-  
+  const displayProducts = sortedProducts.length > 0 ? sortedProducts : singleCategory;
+  console.log('сортирован массив',sortedProducts)
+  console.log('товары одной категории',singleCategory)
+  console.log('товары для отрисовки',displayProducts)
+
+
   return (
     <div>
         {findCategories[0] ? (
@@ -38,14 +40,12 @@ const SingleCategory = observer(() => {
         ) : (
           isLoading && <p>Loading...</p>
         )}
-      <div className={sort.wrapper}>
-        {<SortingPrice/>}
-        {<DiscountSorting/>}
-        {<DropdownSorting/>}
+      <div >
+        {<SortContiner products={singleCategory}/>}
       </div>
       <div className={prod.wrapper}>
         {isLoading ? (<p>Loading...</p>) : 
-        (singleCategory.map((product) => (
+        displayProducts.map ((product) => (
           
             <div key={product.id} className={prod.card}>
               
@@ -79,7 +79,7 @@ const SingleCategory = observer(() => {
                        
             </div>
           ))
-        )}
+        }
       </div>
     </div>
   );

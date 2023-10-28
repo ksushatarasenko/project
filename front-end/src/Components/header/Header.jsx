@@ -1,11 +1,12 @@
 import React, { useRef} from 'react';
 import header from './header.module.css';
 import Nav from '../../Nav'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from './images/logo.png'
 import order from './images/icons8-shopping_bag 1.png'
 import burger_icon from './images/burger_icon.png'
-
+import cartStore from '../../store/cartStore/cartStore';
+import '../../app.css'
 
 function Header () {
   const navbarRef = useRef(null);
@@ -15,20 +16,30 @@ function Header () {
   
   return (
     <div className={header.wrapper}>
-      <div className={header.logo}>
-        <div>
-          <img src={logo} alt="logo" />
+        <div className={header.logoMenu}>
+            <div className={header.logo}>
+              <Link to='/'><img src={logo} alt="logo" /></Link>
+            </div>
+            <button className={header.btn}>
+              <Link to='/categories/all'>Catalog</Link>
+            </button>
         </div>
-        <button className={header.btn}>
-          <Link to='/categories/all'>Catalog</Link>
-        </button>
-      </div>
-      <div >
-        <Nav />
-      </div>
+        <div className={header.navMenu}>
+            <Nav />
+        </div>
       
-
+{/* ===== burger menu ========== */}
       <div className={header.burger_menu_container} >
+        <div className={header.cart}>    
+            <Link to='/order'>
+                <img src={order} alt="order" />
+                {cartStore.totalCount > 0 ? (
+                <p className='cart_p'>Items in cart: {cartStore.totalCount}</p>
+              ) : (
+                <p className='cart_p'>Your cart is empty</p>
+              )}
+            </Link> 
+        </div>
 
         <div className={header.burger_menu}>
             <div className={header.burger_icon} onClick={handleClick}>         
@@ -37,18 +48,14 @@ function Header () {
            
             <div className={header.navbar}
                 ref={navbarRef}>
-              <Link to='/'>Main Page</Link>
-              <Link to='/products/all'>All products</Link>
-              <Link to='/promotion'>All salies</Link>
+              <NavLink to='/' className={({isActive})=> isActive ? 'active' : ''}>Main Page</NavLink>
+              <NavLink to='/products/all' className={({isActive})=> isActive ? 'active' : ''}>All products</NavLink>
+              <NavLink to='/promotion' className={({isActive})=> isActive ? 'active' : ''}>All salies</NavLink>
+              
             </div>
         </div>
        
-        <div className={header.cart}>
-             
-          <Link to='/order'>
-              <img src={order} alt="order" />
-          </Link> 
-        </div>
+        
            
       </div>
     </div>

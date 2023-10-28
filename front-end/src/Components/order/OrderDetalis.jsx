@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite'
 import cartStore from '../../store/cartStore/cartStore'
 import order from './order.module.css'
 import Modal from '../modalWindow/Modal'
+import modal from '../modalWindow/modal.module.css'
+
 
 
 
@@ -40,7 +42,11 @@ const OrderDetalis = observer(() => {
                 <input type="text" placeholder='Phone number' className={order.input}/>
                 <button className={order.btn} onClick={handlePost}>Order</button>
                 {localStorage.length === 0 && (
-                    <Modal>
+                    <Modal
+                         wrapperClassName={modal.wrapper}
+                         contentClassName={modal.content}
+                         textClassName={modal.text}
+                         btnClassName={modal.btn}>
                         <p>The order has been sent.</p>
                         <p>Thank you for your purchase!</p>
                     </Modal>

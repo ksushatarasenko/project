@@ -4,36 +4,35 @@ import promo from './promotion.module.css'
 import { Link } from 'react-router-dom';
 import cartStore
 from '../../store/cartStore/cartStore';
-import SortingPrice from '../sorting/SortingPrice';
-import DropdownSorting from '../sorting/DropdownSorting';
+import sortingStore from '../../store/sorting/sortingStore';
+import { observer } from 'mobx-react-lite';
 
 
-
-function Promotion({limit}) {
+const Promotion = observer(({limit}) => {
   const {products, isLoading, getAllProducts} = productsStore;
+  const {sortedProducts} = sortingStore;
 
+console.log(sortedProducts)
   const handleAddToCart = (product) => {
     cartStore.addItem(product);
   }
-
+const saleProducts = products.filter((product) => product.discont_price !== null);
   useEffect(() => {
     getAllProducts();
   }, [getAllProducts]);
 
-  const saleProducts = products.filter((product) => product.discont_price);
-
+  
+  const displayProducts = sortedProducts.length > 0 ? sortedProducts : saleProducts;
+  
   return (
   <div>
-    <h2 className={promo.sale}>Sale</h2>
-    <div className={promo.wrapper}>
-        {/* {<SortingPrice/>}
-        {<DropdownSorting/>} */}
-      </div>
+    
+
     {isLoading ? (
       <p>Loading...</p>
     ) : (
       <div className={promo.wrapper}>
-        {saleProducts.slice(0,limit).map((product) => (
+        {displayProducts.slice(0,limit).map((product) => (
           <div key={product.id} className={promo.cardProduct}>
             
             <div className={promo.image} >
@@ -68,6 +67,6 @@ function Promotion({limit}) {
     
   </div>
     )
-}
+})
 
 export default Promotion

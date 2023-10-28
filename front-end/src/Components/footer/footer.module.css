@@ -49,6 +49,12 @@
     font-weight: 700;
     margin-bottom: 10%;
 }
+.icon, .adress{
+    transition: transform 0.5s ease;
+}
+.icon:hover, .adress:hover{
+    transform: scale(0.9);
+}
 .icon img{
    /* border: 2px solid green; */
     width: 44px;

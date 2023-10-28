@@ -26,7 +26,11 @@
     border: none;
     margin-bottom: 139px;
     margin-top: 60px;
-    
+    transition: transform 0.5s ease;
+}
+.btn:hover{
+    transform: scale(0.95);
+    background-color: #ebefeb;
 }
 .btn a{
     text-decoration: none; 

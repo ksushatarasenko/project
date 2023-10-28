@@ -9,8 +9,8 @@ function SortContiner({products}) {
   return (
     <div className={sort.wrapper}>
         <SortingPrice products={products}/>
-        <DiscountSorting/>
-        <DropdownSorting/>
+        <DiscountSorting products={products}/>
+        <DropdownSorting products={products}/>
     </div>
   )
 }

@@ -21,7 +21,10 @@ const Categories = observer(({limit}) => {
           <div className={categor.wrapper}>
             {allCategories.slice(0, limit).map((categorie) => (
               <div key={categorie.id}  className={categor.item}>
-                <img src={`http://localhost:3333/${categorie.image}`} alt={categorie.id} className={categor.image}/>
+                <Link to={`/categories/${categorie.id}`}>
+                  <img src={`http://localhost:3333/${categorie.image}`} alt={categorie.id} className={categor.image}/>
+                </Link>
+                
                 <div className={categor.link}>
                   <Link to={`/categories/${categorie.id}`} className={categor.titleP} >{categorie.title} </Link>
                 </div>

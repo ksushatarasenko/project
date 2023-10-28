@@ -2,11 +2,11 @@ import React from 'react'
 import { observer } from 'mobx-react-lite'
 import sortingStore from '../../store/sorting/sortingStore'
 import sort from './sorting.module.css'
-import allProducts from '../../store/productsStore'
 
-const DiscountSorting = observer(() => {
+const DiscountSorting = observer(({products}) => {
     const {setShowDiscount} = sortingStore
-    const {products} = allProducts;
+    // const {products} = allProducts;
+    // const {products} = SingleCategory;
 
     const handleChangeCheckbox = (e) => {  
       let checked = (e.target.checked);
@@ -16,15 +16,18 @@ const DiscountSorting = observer(() => {
 
   return (
     
-    <div className={sort.discount}>
+    <div className={sort.checkbox}>
+      <label className={sort.label}>
         <h3>Discounted items: </h3>
-        <form className={sort.discount_form}>
-            <input 
-              type="checkbox" 
-              onChange={handleChangeCheckbox} 
-              className={sort.discount_input} />
-        </form>
+        <input      
+          type="checkbox" 
+          onChange={handleChangeCheckbox} 
+          className={sort.input}
+          />
+        <span className={sort.fake}></span>
+      </label>
     </div>
+  
   )
 })
 

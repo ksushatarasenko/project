@@ -1,4 +1,3 @@
-import Footer from '../footer/Footer'
 import Sale from '../sale/Sale'
 import Discount from '../discount/Discount'
 import { Link} from 'react-router-dom'
@@ -19,10 +18,11 @@ const Home = () => {
               <button className={home.btn}>
                   <Link to='/categories/all'>All catalog</Link>
               </button>
-          </div>
+           </div>            
         </div>  
-      <Categories limit={4} />      
+      <Categories limit={4} />   
       <Discount/>
+      <h2 className={home.h2}>Sale</h2>
       <Promotion limit={4}/>
       
     </div>

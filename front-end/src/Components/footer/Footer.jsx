@@ -17,18 +17,16 @@ function Footer() {
               <Link to={'https://www.instagram.com/'} target='_blanket'>
                   <img src={instagram} 
                        alt="instagram" 
-                       />
-                Instagram</Link>
-              
+                       />Instagram
+              </Link> 
             </div>
             <div className={footer.icon}>
               <Link to={'https://www.whatsapp.com/'}target='_blanket'>
                 <img 
                   src={whatsapp} 
                   alt="logo" 
-                  />
-                WhatsApp</Link>
-              
+                  />WhatsApp
+              </Link> 
             </div>
           </div>
           
@@ -36,12 +34,15 @@ function Footer() {
         <div className={footer.adres}>
           <h2 className={footer.h2}>Address</h2>
           <div className={footer.text}>
-            <h3 className={footer.adress} >
-              <Link to={'https://tel-ran.de/'} target='_blanket'>Linkstraße 2, 8 OG, 10785,
-              </Link> </h3>
-            <h3  className={footer.adress}>
-              <Link to={'https://tel-ran.de/'} target='_blanket'>Berlin, Deutschland
-              </Link></h3>
+            <div className={footer.adress}>
+                <h3  >
+                  <Link to={'https://tel-ran.de/'} target='_blanket'>Linkstraße 2, 8 OG, 10785,
+                  </Link> </h3>
+                <h3  >
+                  <Link to={'https://tel-ran.de/'} target='_blanket'>Berlin, Deutschland
+                  </Link></h3>
+            </div>
+            
           </div>
           <div className={footer.text}>
             <p className={footer.p}>Working Hours:</p>

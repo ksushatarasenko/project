@@ -1,13 +1,12 @@
 .categoriesWrapper{
-    margin-top: 40px;
-   
+    margin-top: 40px ;   
 }
+
 
 .titleWrapper{
     display: flex;
     gap: 100px;
     align-items: center;
-    margin: 20px 1%;
     
 }
 .title{
@@ -20,13 +19,22 @@
 .btn{
     width: 120px;
     height: 30px;
-    
-   
+    transition: transform 0.5s ease; 
+    background-color: white; 
 }
 .btn a{
     text-decoration: none;
     color: #8B8B8B;
     font-size: 12px;
+}
+.btn:hover{
+    transform: scale(0.95);
+    background-color: #ebefeb;
+}
+.h2{
+    margin: 3%;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 @media (max-width: 420px){

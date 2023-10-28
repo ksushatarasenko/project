@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import modal from './modal.module.css'
+// import modal from './modal.module.css'
 
-const Modal = ({ children }) => {
+const Modal = ({ children, wrapperClassName, contentClassName, textClassName, btnClassName}) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const closeModal = () => {
@@ -14,13 +14,13 @@ const Modal = ({ children }) => {
     }
 };
   return isOpen ? (
-    <div className={modal.wrapper} onClick={overlayClick}>
-      <div className={modal.content}>
-        <div className={modal.text}>
+    <div className={wrapperClassName} onClick={overlayClick}>
+      <div className={contentClassName}>
+        <div className={textClassName}>
             {children }
         </div>
         
-        <button onClick={closeModal} className={modal.btn}>Закрыть</button>
+        <button onClick={closeModal} className={btnClassName}>Закрыть</button>
       </div>
     </div>
   ) : null;

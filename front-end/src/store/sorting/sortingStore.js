@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 
 class SortingStore {
+
     products = [];
     sortedProducts = [];
     sortPriceToLower = false;
@@ -9,105 +10,118 @@ class SortingStore {
     sortNameToLower = false;
     sortNameToDown = false;
     showDiscount = false;
-    data = {}
-     
+    data = {};
+    intermedianteSortedProducts = [];
    
 
     constructor() {
         makeAutoObservable(this);
         
     }
-    
+   
+resetSortedProducts() {
+        this.sortedProducts = [];
+    }
 
- setShowDiscount = (checked, products) =>{
+setShowDiscount = (checked, products) =>{
     this.showDiscount = checked
-    this.products = products
-    this.setFilterProducts()   
+    this.products = products;
+    this.setFilterProducts() 
+    this.updateSortedProducts();
  }   
 // ======= sort min-max ========
 setSortPrice (data, products) {   
     this.data = data
-    this.products = products
+    this.products = this.sortedProducts.length === 0 ? products : this.sortedProducts;
     this.setFilterProducts()
-    this.data = {}
+    this.updateSortedProducts();
   }
 
 //   ==================
 
 setSortPriceToLower = (products) => {
-    
-    this.products = products;
+    this.products = this.sortedProducts.length === 0 ? products : this.sortedProducts;
     this.sortPriceToLower = !this.sortPriceToLower;
-    console.log(this.sortPriceToLower)
     this.setFilterProducts();
-    this.sortPriceToLower = false; 
+    this.updateSortedProducts();
     }
-setSortPriceToDown = (products) => {
-   
-    this.products = products;
+setSortPriceToDown = (products) => { 
+    this.products = this.sortedProducts.length === 0 ? products : this.sortedProducts;
     this.sortPriceToDown = !this.sortPriceToDown;
-    console.log(this.sortPriceToDown)
     this.setFilterProducts()
-    this.sortPriceToDown = false;
+    this.updateSortedProducts();
 }
 
 setSortNameToLower = (products) => {
-    
-    this.products = products;
+    this.products = this.sortedProducts.length === 0 ? products : this.sortedProducts;
     this.sortNameToLower = !this.sortNameToLower ; 
     this.setFilterProducts();
-    console.log(this.sortNameToLower)
-    this.sortNameToLower = false;
-    }
+    this.updateSortedProducts();
+}
 
 setSortNameToDown = (products) => {
-    
-    this.products = products;
+    this.products = this.sortedProducts.length === 0 ? products : this.sortedProducts;
     this.sortNameToDown = !this.sortNameToDown ; 
     this.setFilterProducts();
-    console.log(this.sortNameToDown)
-    this.sortNameToDown = false;
-    }
+    this.updateSortedProducts();
+}
 // ========== ALL SORT ================
  setFilterProducts(){
     let sortedProducts = [...this.products]
-    console.log(sortedProducts)
+    this.updateSortedProducts();
+    console.log("массив отсортирован в начале сортировки" , sortedProducts)
+    
+    if (this.data.minPrice >= 0 && this.data.maxPrice > 0) {
+        sortedProducts = sortedProducts.filter(product => {
+          const discontPrice = product.discont_price;
+          const price = product.price;     
+          return (discontPrice !== null && discontPrice >= this.data.minPrice && discontPrice <= this.data.maxPrice) ||
+                 (discontPrice === null && price >= this.data.minPrice && price <= this.data.maxPrice);
+        });
+      }
+    console.log('проверка чекбокс до',this.showDiscount,sortedProducts)
 
     if(this.showDiscount){
         sortedProducts = sortedProducts.filter((product) => product.discont_price !== null)
     }
-    console.log(sortedProducts)
-    console.log('showDiscount:' + this.showDiscount)
-    console.log("Data:" + this.data)
-    console.log("PriceStatusLower:" + this.sortPriceToLower)
-    console.log("PriceStatusDown:" + this.sortPriceToDown)
-    console.log("TitleLower:" + this.sortNameToLower)
-    console.log("TitleDown:" + this.sortNameToDown)
 
+    console.log('проверка в начале сортировки', sortedProducts)
+    
+    
+            sortedProducts.sort((a, b) => {
+                const hasDiscountA = a.discont_price !== null;
+                const hasDiscountB = b.discont_price !== null;  
 
-    if(this.data.minPrice >= 0 || this.data.maxPrice >0){
-        sortedProducts = sortedProducts.filter(product => product.price >= this.data.minPrice && product.price <= this.data.maxPrice)
+                const priceA = hasDiscountA ? a.discont_price : a.price;
+                const priceB = hasDiscountB ? b.discont_price : b.price;
+                if (this.sortPriceToLower) {
+                    return priceB - priceA ;
+                } else if (this.sortPriceToDown){
+                    return priceA  - priceB;
+                } else if(this.sortNameToLower) {
+                    return a.title.localeCompare(b.title);
+                } else if (this.sortNameToDown){
+                    return b.title.localeCompare(a.title)
+                }
+                    return 0;
+             });
+    
+    console.log('проверка в конце сортировки', sortedProducts)
+    console.log(this.data)
+    
+
+  
+    this.intermedianteSortedProducts = sortedProducts;
+    this.updateSortedProducts()
+    } 
+
+    updateSortedProducts(){
+        this.sortedProducts = [...this.intermedianteSortedProducts];
+        console.log('проверка в конце обновление массива',this.sortedProducts)
     }
     
-    sortedProducts.sort((a, b) => {
-                    if (this.sortPriceToLower) {
-                        return b.price - a.price;
-                    } else if (this.sortPriceToDown){
-                        return a.price - b.price;
-                    } else if(this.sortNameToLower) {
-                        return a.title.localeCompare(b.title);
-                    } else if (this.sortNameToDown){
-                        return b.title.localeCompare(a.title)
-                    }
-                    return 0;
-                });
-
-   console.log(sortedProducts)
-    this.sortedProducts = sortedProducts
-
-    } 
-    
 }
+
 
 const sortingStore = new SortingStore();
 

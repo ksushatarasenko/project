@@ -1,25 +1,28 @@
 
 import { observer } from 'mobx-react-lite'; 
 import productsStore from '../../../store/productsStore';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import cardProd from './singleProduct.module.css'
 import cartStore from '../../../store/cartStore/cartStore'
+import sortingStore from '../../../store/sorting/sortingStore';
 
 
-const Product = observer(() => {
+const SingleProduct = observer(() => {
   const { id } = useParams(); 
   const { singleProduct, isLoading, getSingleProduct} = productsStore;
-  // const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [isAddToCart, setIsAddToCart] = useState(false);
+  const location = useLocation();
 
-  const handleAddToCart = (product) => {
-    // setSelectedProduct(product)
+  const handleAddToCart = (product) => { 
     cartStore.addItem(product);
-    // setIsAddToCart(true);
+    
   }
 
   useEffect(() => {
+    sortingStore.resetSortedProducts();
+  },[location.pathname])
+
+  useEffect(() => {  
     getSingleProduct(id);
   }, []);
 
@@ -77,5 +80,5 @@ const Product = observer(() => {
 });
 
 
-export default Product;
+export default SingleProduct;
 

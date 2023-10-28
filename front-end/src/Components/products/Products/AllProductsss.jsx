@@ -3,25 +3,31 @@ import prod from './products.module.css';
 import productsStore from '../../../store/productsStore'; 
 import { observer } from 'mobx-react-lite'; 
 import { useEffect } from 'react'; 
-import { Link } from 'react-router-dom'; 
+import { Link, useLocation } from 'react-router-dom'; 
 import sortingStore from '../../../store/sorting/sortingStore';
 import SortContiner from '../../sorting/SortContainer';
 import cartStore from '../../../store/cartStore/cartStore';
+import modal from '../../modalWindow/modal.module.css'
+import Modal from '../../modalWindow/Modal';
 
-
-const Products = observer(() => {
+const AllProducts = observer(() => {
   const { products, isLoading, getAllProducts } = productsStore;
   const {sortedProducts} = sortingStore;
+  const location = useLocation();
+  
 
   const handleAddToCart = (product) => {
     cartStore.addItem(product);
+
   }
 
-  
+  useEffect(() => {
+    sortingStore.resetSortedProducts();
+  }, [location.pathname]);
   
   useEffect(() => { 
       getAllProducts();   
-  }, []);
+  }, [getAllProducts]);
   
   
   
@@ -46,6 +52,7 @@ const Products = observer(() => {
                     <button className={prod.btn} 
                     onClick={() => handleAddToCart(product)}
                     >To cart</button>
+                   
               </div>
 
               <div className={prod.price}>
@@ -68,8 +75,16 @@ const Products = observer(() => {
           ))
         )}
       </div>
+      {/* <Modal
+              wrapperClassName={modal.wrapper}
+              contentClassName={modal.content}
+              textClassName={modal.text}
+              btnClassName={modal.btn}>
+              <p>Product added to cart.</p>
+              <p>Thank you for your purchase!</p>
+      </Modal> */}
     </div>
   );
 });
 
-export default Products; 
+export default AllProducts; 

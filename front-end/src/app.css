@@ -13,3 +13,25 @@
     margin: 0 auto;
     font-family: 'Montserrat', sans-serif;
 }
+/* ===== Nav ============== */
+
+.active{
+  color: rgb(2, 163, 2) !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;
+}
+@media (max-width: 540px){
+  .active{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+
+  }
+  
+}
+
+.cart{
+  display: flex;
+}
+.cart_p{
+  font-size: 14px;
+}
