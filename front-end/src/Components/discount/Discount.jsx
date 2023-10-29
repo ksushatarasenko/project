@@ -1,6 +1,6 @@
 import React from 'react'
 import disc from './discount.module.css'
-import gnom from './gnom.png';
+import gnom from '../image/gnom.png';
 
 
 

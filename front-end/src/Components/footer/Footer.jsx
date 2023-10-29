@@ -2,8 +2,8 @@
 import footer from'./footer.module.css'
 import Map from './Map/Map'
 import { Link } from 'react-router-dom'
-import instagram from './image/instagram.png'
-import whatsapp from './image/icons8-whatsapp 1.png'
+import instagram from '../image/instagram.png'
+import whatsapp from '../image/watsapp.png'
 
 function Footer() {
   return (

@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 // import modal from './modal.module.css'
 
-const Modal = ({ children, wrapperClassName, contentClassName, textClassName, btnClassName}) => {
-  const [isOpen, setIsOpen] = useState(true);
+const Modal = ({ children, wrapperClassName, contentClassName, textClassName, btnClassName, ItemsClassName,OrdersClassName, isModalOpen, setIsModalOpen}) => {
+ 
 
   const closeModal = () => {
-    setIsOpen(false);
+    setIsModalOpen(false);
   };
 
   const overlayClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
+  
 };
-  return isOpen ? (
-    <div className={wrapperClassName} onClick={overlayClick}>
-      <div className={contentClassName}>
-        <div className={textClassName}>
-            {children }
-        </div>
-        
-        <button onClick={closeModal} className={btnClassName}>Закрыть</button>
-      </div>
+
+console.log('Modal in modal', isModalOpen)
+
+  return isModalOpen ? (
+    <div className={wrapperClassName} onClick={overlayClick}>     
+        {children }
     </div>
   ) : null;
 };

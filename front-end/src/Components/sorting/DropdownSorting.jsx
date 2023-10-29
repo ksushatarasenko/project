@@ -35,11 +35,11 @@ const DropdownSorting = observer(({products}) => {
     <div className={sort.price}>
         <h3>Sorted </h3>
         <select value={selectOption} onChange={handleSortChange} className={sort.select}>
-            <option value="start" className={sort.option}>Сортировать по ...</option>
-            <option value="priceDescending">Цена по убыванию</option>
-            <option value="priceAscending">Цена по возрастанию</option>
-            <option value="nameAscending">Название А-Я</option>
-            <option value="nameDescending">Название Я-А</option>
+            <option value="start" className={sort.option}>Sort by...</option>
+            <option value="priceDescending">Price high to low</option>
+            <option value="priceAscending">Price low to high</option>
+            <option value="nameAscending">Title А-Z</option>
+            <option value="nameDescending">Title Z-A</option>
         </select>
 
     </div>

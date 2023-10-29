@@ -40,7 +40,6 @@
     display: flex;
     width: 319px;
     height: 276px;position: relative;
-    /* border: 2px solid red; */
     justify-content: center;
 }
 
@@ -48,6 +47,7 @@
     width: 100%;
     height: 100%;
     border-radius: 15px;
+    box-shadow: 2px 4px 5px rgba(4, 81, 4, 0.6);
 }
 
 .btn{

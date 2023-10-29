@@ -1,4 +1,4 @@
-
+import React, { useState } from 'react';
 import prod from './products.module.css'; 
 import productsStore from '../../../store/productsStore'; 
 import { observer } from 'mobx-react-lite'; 
@@ -9,16 +9,22 @@ import SortContiner from '../../sorting/SortContainer';
 import cartStore from '../../../store/cartStore/cartStore';
 import modal from '../../modalWindow/modal.module.css'
 import Modal from '../../modalWindow/Modal';
+import ModalAddItems from '../../modalWindow/ModalAddItems';
 
 const AllProducts = observer(() => {
   const { products, isLoading, getAllProducts } = productsStore;
   const {sortedProducts} = sortingStore;
   const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
 
   const handleAddToCart = (product) => {
     cartStore.addItem(product);
+    setIsModalOpen(true); 
+  }
 
+  const closeModal = () => {
+    setIsModalOpen(false);
   }
 
   useEffect(() => {
@@ -28,9 +34,7 @@ const AllProducts = observer(() => {
   useEffect(() => { 
       getAllProducts();   
   }, [getAllProducts]);
-  
-  
-  
+   
   return (
     <div>
       <div >
@@ -75,14 +79,31 @@ const AllProducts = observer(() => {
           ))
         )}
       </div>
-      {/* <Modal
-              wrapperClassName={modal.wrapper}
-              contentClassName={modal.content}
-              textClassName={modal.text}
-              btnClassName={modal.btn}>
-              <p>Product added to cart.</p>
-              <p>Thank you for your purchase!</p>
-      </Modal> */}
+      {isModalOpen && (
+        <Modal
+              isModalOpen={isModalOpen}
+              setIsModalOpen = {() => setIsModalOpen(false)}
+              wrapperClassName={modal.prodWrapper}
+              contentClassName={modal.prodContent}
+              textClassName={modal.prodText}
+              btnClassName={modal.btn}
+              >             
+                <div >   
+                  <div className={modal.prodContent}>
+                    <div className={modal.prodItems}>
+                      <ModalAddItems/>                     
+                    </div>
+                    <div className={modal.btnContainer}>
+                      <button onClick={closeModal} className={modal.btnAllProduct}>Continue shopping</button>  
+                      <Link to={'/order'}>
+                        <button  className={modal.btnAllProductToCart}>Go to cart</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>          
+        </Modal> 
+      )}
+       
     </div>
   );
 });

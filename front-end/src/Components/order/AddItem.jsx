@@ -11,12 +11,10 @@ const AddItem = observer(() => {
     return total.toFixed(2)
   }
 
-  
 //    карточка с товаром в корзине
   return (
    
-      <div>
-            
+      <div>           
             {cartStore.isLoading ? (
                 <p>Loading ... </p>
             ) : (

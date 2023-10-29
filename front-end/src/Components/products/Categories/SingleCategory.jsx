@@ -1,25 +1,38 @@
 
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import productsStore from '../../../store/productsStore';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import prod from '../Products/products.module.css'
 import { Link } from 'react-router-dom';
 import cartStore from '../../../store/cartStore/cartStore';
 import SortContiner from '../../sorting/SortContainer';
 import sortingStore from '../../../store/sorting/sortingStore';
-
+import Modal from '../../modalWindow/Modal';
+import ModalAddItems from '../../modalWindow/ModalAddItems';
+import modal from '../../modalWindow/modal.module.css'
 
 
 const SingleCategory = observer(() => {
   const {id} = useParams();
   const {singleCategory, isLoading,allCategories} = productsStore;
   const {sortedProducts} = sortingStore;
-  // console.log(sortedProducts)
+  const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleAddToCart = (product) => {
     cartStore.addItem(product);
+    setIsModalOpen(true);
   }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
+
+  useEffect(() => {
+    sortingStore.resetSortedProducts();
+  },[location.pathname]);
 
   useEffect(() => {
     productsStore.getSingleCategory(id);
@@ -81,6 +94,30 @@ const SingleCategory = observer(() => {
           ))
         }
       </div>
+      {isModalOpen && (
+        <Modal
+              isModalOpen={isModalOpen}
+              setIsModalOpen = {() => setIsModalOpen(false)}
+              wrapperClassName={modal.prodWrapper}
+              contentClassName={modal.prodContent}
+              textClassName={modal.prodText}
+              btnClassName={modal.btn}
+              >             
+                <div >   
+                  <div className={modal.prodContent}>
+                    <div className={modal.prodItems}>
+                      <ModalAddItems/>                     
+                    </div>
+                    <div className={modal.btnContainer}>
+                      <button onClick={closeModal} className={modal.btnAllProduct}>Continue shopping</button>  
+                      <Link to={'/order'}>
+                        <button  className={modal.btnAllProductToCart}>Go to cart</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>          
+        </Modal> 
+      )}
     </div>
   );
       

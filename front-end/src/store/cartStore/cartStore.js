@@ -34,6 +34,13 @@ class CartStore {
         this.amountOrderPrice();
   }
 
+  setClearCart = () => {
+    this.items = []; 
+    this.calculateTotalCount(); 
+    this.saveLocalStorage(); 
+    this.amountOrderPrice();
+  }
+
   increment(productId){
     const index = this.items.findIndex(item => item.product.id === productId);
     if(index !== -1){
@@ -47,20 +54,22 @@ class CartStore {
     this.amountOrderPrice();
   }
 
-  decrement(productId){
+  decrement(productId) {
     const index = this.items.findIndex(item => item.product.id === productId);
-    if(index !== -1 && this.items[index].quantity > 0){
-      const item = this.items[index];
-      item.quantity -=1; 
-      this.calculateTotalCount();
-      this.saveLocalStorage();
-      this.amountOrderPrice();     
-      } else if(this.items[index].quantity === 0){
-        this.items.splice(index,1);
-      } else {
-        this.items.splice(index, 1)
-      }
-  }
+    if (index !== -1) {
+        const item = this.items[index];
+        if (item.quantity > 0) {
+            item.quantity -= 1;
+        }
+        if (item.quantity <= 0) {
+            this.items.splice(index, 1);
+        }
+        this.calculateTotalCount();
+        this.saveLocalStorage();
+        this.amountOrderPrice();
+    }
+}
+
 
   getSelectItems(){
     return this.items;
@@ -103,8 +112,8 @@ class CartStore {
       } finally {
           this.isLoading = false;
           localStorage.clear();
-          window.location.reload();// для перезагрузки страницы
-          console.log(this.items)
+          // window.location.reload();// для перезагрузки страницы
+          // console.log(this.items)
       }
     }
   }

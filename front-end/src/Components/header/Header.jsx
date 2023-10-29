@@ -2,9 +2,9 @@ import React, { useRef} from 'react';
 import header from './header.module.css';
 import Nav from '../../Nav'
 import { Link, NavLink } from 'react-router-dom';
-import logo from './images/logo.png'
-import order from './images/icons8-shopping_bag 1.png'
-import burger_icon from './images/burger_icon.png'
+import logo from '../image/logo.png'
+import order from '../image/icons8-shopping_bag 1.png'
+import burger_icon from '../image/burger_icon.png'
 import cartStore from '../../store/cartStore/cartStore';
 import '../../app.css'
 

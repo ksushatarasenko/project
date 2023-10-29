@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'; 
 import header from './Components/header/header.module.css'
-import order from './Components/header/images/icons8-shopping_bag 1.png'
+import order from './Components/image/icons8-shopping_bag 1.png'
 import cartStore from './store/cartStore/cartStore';
 import { observer } from 'mobx-react-lite';
 import './app.css'
