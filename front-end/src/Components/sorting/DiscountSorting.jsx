@@ -5,8 +5,6 @@ import sort from './sorting.module.css'
 
 const DiscountSorting = observer(({products}) => {
     const {setShowDiscount} = sortingStore
-    // const {products} = allProducts;
-    // const {products} = SingleCategory;
 
     const handleChangeCheckbox = (e) => {  
       let checked = (e.target.checked);

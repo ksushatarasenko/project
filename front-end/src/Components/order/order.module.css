@@ -65,6 +65,10 @@
     grid-area: image;
     align-items: center;
     justify-content: center;
+    transition: transform 0.5s ease;
+}
+.image:hover{
+    transform: scale(1.1);
 }
 .title_counter{
     /* margin-left: 30px; */
@@ -171,6 +175,10 @@
 .input{
     text-align: center;
     font-size: 18px;
+}
+.input:hover{
+    border: 2px solid #339933;
+    
 }
 
 .btn{

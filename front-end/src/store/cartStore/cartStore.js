@@ -7,7 +7,8 @@ class CartStore {
   totalCount = 0;
   isLoading = false;
   amountPrice = 0;
-  
+  isFirstModalOpen = false;
+  isSecondModalOpen = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,7 +41,21 @@ class CartStore {
     this.saveLocalStorage(); 
     this.amountOrderPrice();
   }
+// ============
+  setIsSecondModalOpen = () => {
+    this.isSecondModalOpen = true;
+ }
+  setIsFirstModalOpen = () => {
+  this.isFirstModalOpen = true;
+  }
 
+  setIsSecondModalClose = () => {
+    this.isSecondModalOpen = false;
+ }
+  setIsFirstModalClose = () => {
+  this.isFirstModalOpen = false;
+  }
+// ===========
   increment(productId){
     const index = this.items.findIndex(item => item.product.id === productId);
     if(index !== -1){
@@ -99,23 +114,24 @@ class CartStore {
       this.isLoading = false;
     } 
 
-   async placeOrder () {    
-    this.isLoading = true;
-    
-   try {
-      const response = await axios.post('http://localhost:3333/order/send', this.items);
-      this.orderInfo = response.data;
-      console.log("Успешный ответ от сервера:", response.data);
+    async placeOrder() {    
+      this.isLoading = true;
+      
+      try {
+          if (this.items.length > 0) {
+              const response = await axios.post('http://localhost:3333/order/send', this.items);
+              this.orderInfo = response.data;
+              console.log("Успешный ответ от сервера:", response.data);
+          }
       } catch (error) {
-        console.error("Error placing order: ", error);
-        console.error("Ошибка при отправке POST запроса:", error);
+          console.error("Error placing order: ", error);
+          console.error("Ошибка при отправке POST запроса:", error);
       } finally {
           this.isLoading = false;
           localStorage.clear();
-          // window.location.reload();// для перезагрузки страницы
-          // console.log(this.items)
       }
     }
+  
   }
 
 

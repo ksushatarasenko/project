@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s;
+    z-index: 3;
 } 
 
 .content{
@@ -115,6 +116,18 @@
   .btnAllProductToCart{
       background-color: green;   
     }
+  .p{
+    color: black;
+  }
+  /* ====== Discount ========= */
+  .contentDiscount{
+    background-color: rgb(250, 242, 226);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 4%;
+    border-radius: 15px;
+    width: 40%;
+    max-height: 100%;
+  }
 
     @media(max-width:386px){
       .btnContainer{
@@ -126,5 +139,9 @@
       .btnAllProductToCart{
         width: 140px;
         margin: 5% 0; 
+      }
+      .p{
+        font-size: 20px;
+        line-height: 20px;
       }
     }

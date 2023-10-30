@@ -1,57 +1,60 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import cartStore from '../../store/cartStore/cartStore'
 import order from './order.module.css'
 import Modal from '../modalWindow/Modal'
 import modal from '../modalWindow/modal.module.css'
-import InputMask from 'react-input-mask';
 
 
-
-
-// =========== Orders detalis ??==================
+// =========== Orders detalis ()==================
 const OrderDetalis = observer(() => {
-    const { placeOrder, setClearCart} = cartStore;
-    const [isOrderModalOpen, setOrderModalOpen] = useState(false);
+    const { placeOrder, setClearCart, setIsSecondModalOpen, setIsFirstModalOpen, isFirstModalOpen, isSecondModalOpen, setIsFirstModalClose,setIsSecondModalClose} = cartStore;
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
+    const phoneInputRef = useRef(null);
 
     useEffect(() => {
         cartStore.loadLocalStorage();
     }, [])
      
-    
     const handleInputChange = (e) => {
-        let inputValue = e.target.value;
-        if (inputValue.length >= 12) { 
+        setPhoneNumber (e.target.value);
+        // inputValue = inputValue.replace(/\D/g, '');
+        if (phoneNumber.length === 12) { 
             setIsValidPhoneNumber(true);
-            setPhoneNumber(inputValue);
+            console.log('phoneNumber ===>', phoneNumber);
         } else {
             setIsValidPhoneNumber(false);
         }
-        console.log('value ===>', inputValue);
-        console.log('length ===>', inputValue.length);
+        console.log('phoneNumber ===>', phoneNumber);
+        
     };
     
     const handlePost =  (e) =>{
         e.preventDefault();
-        if (isValidPhoneNumber) {
-            placeOrder();
-            setOrderModalOpen(true);
-            localStorage.clear();
-            setClearCart();
-            setPhoneNumber ('')
+        if (isValidPhoneNumber && cartStore.items.length > 0) {
+                placeOrder();
+                setIsFirstModalOpen();                   
+                localStorage.clear();
+                setClearCart();               
+                setPhoneNumber('');      
+                if (phoneInputRef.current) {
+                    phoneInputRef.current.focus(); 
+                }
         } else {
+            setIsSecondModalOpen()
             alert("Incorrect phone number entered");
+            setPhoneNumber('')
         }
+            
     }
-    
-    
-      const closeModal = () => {
-        
-        setOrderModalOpen(false);       
-      }
 
+      const closeModal = () => {   
+        setIsFirstModalClose(); 
+        setIsSecondModalClose();
+        console.log(isFirstModalOpen, isSecondModalOpen)    
+      }
+    
   return (
            
         <div className={order.order}>
@@ -69,24 +72,24 @@ const OrderDetalis = observer(() => {
             <form className={order.form} > 
                 <div className={order.formContainer}>
                     <div>
-                        <InputMask
-                            mask="+4 (999) 999-9999"
-                            // maskChar="_"
-                            value={phoneNumber}
-                            onChange={handleInputChange}
+                        <input 
+                            type="text" 
                             placeholder='Phone number'
                             className={order.input}
-                            type='tel'
-                        />
-                         {/* {isValidPhoneNumber ? null : (
-                            <p className="error-message">Incorrect phone number entered</p>
-                        )} */}
+                            onChange={handleInputChange}
+                            value={phoneNumber}
+                            />
+                         {!isValidPhoneNumber && (
+                            <p className="error-message">Неверный номер телефона</p>
+                            )}
                     </div>
                     <button className={order.btn} onClick={handlePost}>Order</button>
-                    {isOrderModalOpen &&  (
+                </div>               
+            </form> 
+                    {isFirstModalOpen &&  isValidPhoneNumber &&(
                         <Modal
-                            isModalOpen={isOrderModalOpen}
-                            setIsModalOpen={setOrderModalOpen}
+                            isModalOpen={isFirstModalOpen}
+                            // setIsModalOpen={setOrderModalOpen}
                             wrapperClassName={modal.wrapper}
                             contentClassName={modal.content}
                             textClassName={modal.text}
@@ -104,9 +107,31 @@ const OrderDetalis = observer(() => {
                                 </div>
                         </Modal>
                     )}
-                </div>
-                
-            </form> 
+                    {isSecondModalOpen && (
+                        <Modal
+                            isModalOpen={setIsSecondModalOpen}
+                            setIsModalOpen={!setIsSecondModalOpen}
+                            wrapperClassName={modal.wrapper}
+                            contentClassName={modal.content}
+                            textClassName={modal.text}
+                            btnClassName={modal.btn}
+                        >
+                            <div className={modal.wrapper}>
+                            <div className={modal.content}>
+                                <div className={modal.text}>
+                                <p>Your cart is empty.</p>
+                                <p>Select product!</p>
+                                </div>
+                                <div>
+                                <button onClick={closeModal} className={modal.btn}>
+                                    Close
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                        </Modal>
+                        )}
+               
         </div>              
     
   )

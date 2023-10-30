@@ -8,7 +8,8 @@ class ProductsStore {
     isLoading = false;
     allCategories = [];
     singleCategory = [];
-    
+    isModalOpen = false;
+    dataServer = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -65,8 +66,29 @@ class ProductsStore {
         this.isLoading = false;
       }
     }
+// ========= Discount ============
+async sendCoupon (phoneNumber){
+  try {
+    if (phoneNumber.length === 12) {
+      const response = await axios.post('http://localhost:3333/sale/send', { phoneNumber });
+      console.log("Successful response from the server:", response.data);
+      return response.data;
+    } else {
+      return ("Wrong phone number. The number must contain 12 digits.");
+    }
+  } catch (error) {
+    console.error("Error when sending a POST request:ЖЖ", error);
+    throw error;
+  }
+}
 
 
+  setIsModalOpen = () => {
+      this.isModalOpen = true;
+   }
+  setIsModalClose = () => {
+    this.isModalOpen = false;
+ }
     
 }
 
