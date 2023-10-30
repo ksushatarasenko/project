@@ -65,6 +65,11 @@
     margin-top: 6%;
     margin-left: 10%;
   }
+
+  .error_message{
+    color: rgb(172, 4, 4);
+    text-align: center;
+  }
   @media (max-width: 900px){
     .img img{
         max-width: 300px;

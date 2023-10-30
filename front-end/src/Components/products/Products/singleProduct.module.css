@@ -8,6 +8,11 @@
     width: 50%;
     margin-left: 40px;
     box-shadow: 2px 4px 5px rgba(4, 81, 4, 0.6);
+    cursor: pointer;
+}
+
+.image.big{
+    width: 100%;
 }
 
 .title{
@@ -67,4 +72,39 @@
     color:#FF32A1;
     font-size: 28px;
     font-weight: 600;
+}
+.description{
+    margin-top: 5%;
+}
+
+@media(max-width: 875px){
+    .title{
+        margin-top: 70px;
+    }
+    
+}
+@media(max-width: 670px){
+    .wrapper{
+        flex-direction: column;
+    }
+    .container_text{
+        margin-top: 5%;
+        width: 70%;
+    }
+    .image{
+        margin-left: 0;
+        
+    }
+    
+    .title{
+        text-align: center;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+    
+}
+@media(max-width: 320px){
+    .description{
+        font-size: 14px;
+    }
 }

@@ -7,8 +7,7 @@ class CartStore {
   totalCount = 0;
   isLoading = false;
   amountPrice = 0;
-  isFirstModalOpen = false;
-  isSecondModalOpen = false;
+  isModalOpen = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -42,19 +41,12 @@ class CartStore {
     this.amountOrderPrice();
   }
 // ============
-  setIsSecondModalOpen = () => {
-    this.isSecondModalOpen = true;
- }
-  setIsFirstModalOpen = () => {
-  this.isFirstModalOpen = true;
-  }
-
-  setIsSecondModalClose = () => {
-    this.isSecondModalOpen = false;
- }
-  setIsFirstModalClose = () => {
-  this.isFirstModalOpen = false;
-  }
+setIsModalOpen = () => {
+  this.isModalOpen = true;
+}
+setIsModalClose = () => {
+this.isModalOpen = false;
+}
 // ===========
   increment(productId){
     const index = this.items.findIndex(item => item.product.id === productId);

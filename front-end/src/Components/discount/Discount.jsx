@@ -1,19 +1,20 @@
-import React, { useRef, useState } from 'react'
+import React, {useState } from 'react'
 import disc from './discount.module.css'
 import gnom from '../image/gnom.png'
 import productsStore from '../../store/productsStore'
 import { observer } from 'mobx-react-lite'
 import Modal from '../modalWindow/Modal'
 import modal from '../modalWindow/modal.module.css'
+import InputMask from 'react-input-mask';
+
 
 
 const Discount = observer  (() =>{
-  const [phoneNumber, setPhoneNumber] = useState('')// состояние номера который вводим в инпут
-
-  const [error, setError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [success, setSuccess] = useState('');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
-  const phoneInputRef = useRef(null);
+  const [isTouched, setIsTouched] = useState(false);
+  
   const {
       isModalOpen, 
       setIsModalOpen, 
@@ -21,58 +22,38 @@ const Discount = observer  (() =>{
       sendCoupon, 
       } = productsStore;
 
-
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-    console.log('lenght =>', phoneNumber.length)
-    if(phoneNumber.length === 11){
-      setIsValidPhoneNumber(true) 
-    } 
-    setError('')
-    setSuccess('');
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isValidPhoneNumber) {
-      try {
-        const response = await sendCoupon(phoneNumber);
-        console.log(response)
-        if (response) {
-          // Обработка успешного ответа
-          if (response.status === 'OK') {
-            setIsModalOpen(true)
-            setSuccess("Your discount has been applied!");
-          } else {
-            setIsModalOpen(true)
-            setError("Wrong phone number.The number must contain 12 digits.");
-          }
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsModalOpen(true)
-      setPhoneNumber("");
-    }
-    //  else {
-    //   setIsModalOpen(true)
-    //   setError("Wrong phone number. The number must contain 12 digits.")
-    //   setPhoneNumber("");
-
-    // }
-  };
+  const handleInputChange = (e) => {
+    setIsTouched(true);
+    const enteredValue = e.target.value;
+    setPhoneNumber(enteredValue);
+    const numericValue = enteredValue.replace(/\D/g, '');
   
-    
-    if (phoneInputRef.current) {
-      phoneInputRef.current.focus(); 
-  }
-  console.log(success, error)
+    if (numericValue.length <= 10) {
+      setIsValidPhoneNumber(false);
+    } else {
+      setIsValidPhoneNumber(true); 
+    }   
+    console.log('status phone =>', isValidPhoneNumber)
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValidPhoneNumber) {  
+      sendCoupon(phoneNumber)   
+      setIsModalOpen(true)
+      setSuccess("Your discount has been applied!");          
+    }     
+    setPhoneNumber("");   
+  };
+
+  console.log(success)
   
 console.log("phone =>>", phoneNumber)
 
 
 const closeModal = () => {   
-  setIsModalClose();   
+  setIsModalClose(); 
+  setSuccess('')  
 }
   return (
     <div className={disc.wrapper}>
@@ -84,19 +65,20 @@ const closeModal = () => {
         <h2 className={disc.h2}>on the first order</h2>
       </div> 
       <form className={disc.form}>
-        <input
-          // style={{ border: isValidPhoneNumber ? '1px solid green' : '1px solid red' }}
-          className={disc.input}          
-          type="text"
-          placeholder="+49"
-          value={phoneNumber}
-          onChange={handlePhoneNumberChange}
-        />
-        {!isValidPhoneNumber && (
-          <div>
-            <p className="error-message">The phone number must be in the format +4 1234567891</p>
-          </div>
-          )}
+           <InputMask
+                mask="+4 999 999 99 99"
+                maskChar=" "
+                type="text"
+                placeholder="+49"
+                className={disc.input} 
+                onChange={handleInputChange}
+                value={phoneNumber}
+            />
+                {!isValidPhoneNumber && isTouched && (
+                  <div className={disc.error_message}>
+                    <p className="error-message">Please enter a correct phone number.</p>
+                  </div>                   
+                )}
         <button className={disc.btn} type="submit" onClick={handleSubmit}>
           Get a discount
         </button>
@@ -113,7 +95,6 @@ const closeModal = () => {
                     <div className={modal.contentDiscount}>     
                         <div className={modal.text}>
                             {success && <p className={modal.p}>{success}</p>}
-                            {error && <p className={modal.p}>{error}</p>}
                         </div>
                         <div>
                             <button onClick={closeModal} className={modal.btn}>Close</button>  

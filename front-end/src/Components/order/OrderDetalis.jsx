@@ -1,58 +1,68 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import cartStore from '../../store/cartStore/cartStore'
 import order from './order.module.css'
 import Modal from '../modalWindow/Modal'
 import modal from '../modalWindow/modal.module.css'
+import InputMask from 'react-input-mask';
 
 
 // =========== Orders detalis ()==================
 const OrderDetalis = observer(() => {
-    const { placeOrder, setClearCart, setIsSecondModalOpen, setIsFirstModalOpen, isFirstModalOpen, isSecondModalOpen, setIsFirstModalClose,setIsSecondModalClose} = cartStore;
+    const { 
+        placeOrder, 
+        setClearCart,
+        isModalOpen,
+        setIsModalOpen, 
+        setIsModalClose} = cartStore;
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
-    const phoneInputRef = useRef(null);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const [isTouched, setIsTouched] = useState(false);
+
 
     useEffect(() => {
         cartStore.loadLocalStorage();
     }, [])
      
     const handleInputChange = (e) => {
-        setPhoneNumber (e.target.value);
-        // inputValue = inputValue.replace(/\D/g, '');
-        if (phoneNumber.length === 12) { 
-            setIsValidPhoneNumber(true);
-            console.log('phoneNumber ===>', phoneNumber);
+        setIsTouched(true);
+        const enteredValue = e.target.value;
+        setPhoneNumber(enteredValue);
+        const numericValue = enteredValue.replace(/\D/g, '');
+      
+        if (numericValue.length <= 10) {
+          setIsValidPhoneNumber(false);
         } else {
-            setIsValidPhoneNumber(false);
-        }
-        console.log('phoneNumber ===>', phoneNumber);
-        
-    };
+          setIsValidPhoneNumber(true); 
+        }   
+        console.log('status phone =>', isValidPhoneNumber)
+      };
     
     const handlePost =  (e) =>{
         e.preventDefault();
         if (isValidPhoneNumber && cartStore.items.length > 0) {
                 placeOrder();
-                setIsFirstModalOpen();                   
+                setIsModalOpen();
+                setSuccess("The order has been sent. Thank you for the order!")                   
                 localStorage.clear();
-                setClearCart();               
-                setPhoneNumber('');      
-                if (phoneInputRef.current) {
-                    phoneInputRef.current.focus(); 
-                }
-        } else {
-            setIsSecondModalOpen()
-            alert("Incorrect phone number entered");
+                setClearCart(); 
+                setPhoneNumber('');                         
+        } else if(isValidPhoneNumber && cartStore.items.length <= 0){
+            setIsModalOpen();
+            setError("There is no item in the cart. Do you want to choose to view the catalogue?");
             setPhoneNumber('')
-        }
-            
+        } else if (!isValidPhoneNumber && cartStore.items.length > 0){
+            setIsModalOpen()
+            setError('"Incorrect phone number entered"')            
+        }            
     }
 
       const closeModal = () => {   
-        setIsFirstModalClose(); 
-        setIsSecondModalClose();
-        console.log(isFirstModalOpen, isSecondModalOpen)    
+        setIsModalClose(); 
+        setError('');
+        setSuccess('');        
       }
     
   return (
@@ -71,69 +81,45 @@ const OrderDetalis = observer(() => {
                     {/* end total + price */}
             <form className={order.form} > 
                 <div className={order.formContainer}>
-                    <div>
-                        <input 
-                            type="text" 
-                            placeholder='Phone number'
-                            className={order.input}
-                            onChange={handleInputChange}
-                            value={phoneNumber}
-                            />
-                         {!isValidPhoneNumber && (
-                            <p className="error-message">Неверный номер телефона</p>
-                            )}
-                    </div>
+                    <InputMask
+                        mask="+4 999 999 99 99"
+                        maskChar=" "
+                        type="text"
+                        placeholder="Phone number"
+                        className={order.input}
+                        onChange={handleInputChange}
+                        value={phoneNumber}
+                        />
+                        {!isValidPhoneNumber && isTouched &&(
+                            <div className={order.error_message}>
+                                <p className="error-message">Please enter a correct phone number.</p>
+                            </div> 
+                        )}
                     <button className={order.btn} onClick={handlePost}>Order</button>
                 </div>               
             </form> 
-                    {isFirstModalOpen &&  isValidPhoneNumber &&(
-                        <Modal
-                            isModalOpen={isFirstModalOpen}
-                            // setIsModalOpen={setOrderModalOpen}
-                            wrapperClassName={modal.wrapper}
-                            contentClassName={modal.content}
-                            textClassName={modal.text}
-                            btnClassName={modal.btn}>
-                                <div className={modal.wrapper}>
-                                    <div className={modal.content}>     
-                                    <div className={modal.text}>
-                                        <p>The order has been sent.</p>
-                                        <p>Thank you for your purchase!</p>                           
-                                    </div>
-                                    <div>
-                                        <button onClick={closeModal} className={modal.btn}>Close</button>  
-                                    </div>
-                                    </div>
-                                </div>
-                        </Modal>
-                    )}
-                    {isSecondModalOpen && (
-                        <Modal
-                            isModalOpen={setIsSecondModalOpen}
-                            setIsModalOpen={!setIsSecondModalOpen}
-                            wrapperClassName={modal.wrapper}
-                            contentClassName={modal.content}
-                            textClassName={modal.text}
-                            btnClassName={modal.btn}
-                        >
-                            <div className={modal.wrapper}>
-                            <div className={modal.content}>
+                    {setIsModalOpen &&(
+                    <Modal
+                        isModalOpen={isModalOpen}
+                        setIsModalOpen = {() => setIsModalOpen(false)}
+                        wrapperClassName={modal.wrapper}
+                        contentClassName={modal.content}
+                        textClassName={modal.text}
+                        btnClassName={modal.btn}>
+                        <div className={modal.wrapper}>
+                            <div className={modal.contentDiscount}>     
                                 <div className={modal.text}>
-                                <p>Your cart is empty.</p>
-                                <p>Select product!</p>
+                                    {success && <p className={modal.p}>{success}</p>}
+                                    {error && <p className={modal.p}>{error}</p>}
                                 </div>
                                 <div>
-                                <button onClick={closeModal} className={modal.btn}>
-                                    Close
-                                </button>
+                                    <button onClick={closeModal} className={modal.btn}>Close</button>  
                                 </div>
                             </div>
-                            </div>
-                        </Modal>
-                        )}
-               
-        </div>              
-    
+                        </div>
+                    </Modal>
+                    )}                   
+        </div>                  
   )
 })
 

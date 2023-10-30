@@ -69,15 +69,15 @@ class ProductsStore {
 // ========= Discount ============
 async sendCoupon (phoneNumber){
   try {
-    if (phoneNumber.length === 12) {
+    // if (phoneNumber.replace(/\D/g, '').length === 16) {
       const response = await axios.post('http://localhost:3333/sale/send', { phoneNumber });
       console.log("Successful response from the server:", response.data);
       return response.data;
-    } else {
-      return ("Wrong phone number. The number must contain 12 digits.");
-    }
+    // } else {
+    //   return ("Wrong phone number. The number must contain 10 digits.");
+    // }
   } catch (error) {
-    console.error("Error when sending a POST request:ЖЖ", error);
+    console.error("Error when sending a POST request:", error);
     throw error;
   }
 }

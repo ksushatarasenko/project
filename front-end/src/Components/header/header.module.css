@@ -44,7 +44,7 @@
 
 .nav{
     display: flex;
-    gap: 40px;
+    gap: 35px;
     padding: 30px;
     align-items: flex-end;
     margin-top: 3%;
@@ -65,13 +65,13 @@
     transform: scale(1.1);
 }
 .order{
-    margin-left: 150px;
+    margin-left: 140px;
     margin-top: 5%;
     padding: 5px;
     transition: transform 0.5s ease;
 }
 .order img{
-    margin-left: 30%;
+    margin-left: 20%;
 }
 
 .order a{
@@ -105,21 +105,31 @@
     opacity:1;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1024px) {
     .order {
         margin-left: 0; 
     }
 }
-@media (max-width: 812px) {
+@media (max-width: 875px) {
     .wrapper{
         flex-direction: column;
+        margin-bottom: 1%;
     }
     .menu{
         justify-content: center;
+        height: 50px;
     }
+    .nav{
+        padding: 10px;
+        margin-top: 10px;
+    }
+    .order{
+        margin-top: 0;
+    }
+    
   
 }
-@media (max-width: 540px){
+@media (max-width: 550px){
     .menu{
         display: none;
     }
