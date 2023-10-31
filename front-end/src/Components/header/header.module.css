@@ -1,17 +1,20 @@
 .wrapper{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 3%;
+    /* border: 1px solid green; */
+    gap: 30%;
 }
 /* ================ */
 .logoMenu{
     width: 70px;
     display: flex;
     padding: 20px;
+    height: 40px;
     gap: 50px;
     align-items: center;
     /* border: 2px solid blue; */
-    margin-left: 3%;
+    /* margin-left: 3%; */
     
 }
 .logo:hover{
@@ -24,6 +27,8 @@
     border-radius: 5px;
     border: none;
     transition: transform 0.5s ease;
+    /* border: 2px solid rgb(255, 17, 0); */
+
 }
 .btn:hover {
     /* background-color: darkgreen;  */
@@ -65,10 +70,12 @@
     transform: scale(1.1);
 }
 .order{
-    margin-left: 140px;
+    margin-left: 200px;
     margin-top: 5%;
     padding: 5px;
     transition: transform 0.5s ease;
+    /* border: 2px solid rgb(255, 0, 204); */
+
 }
 .order img{
     margin-left: 20%;
@@ -81,6 +88,8 @@
 
 .menu{
     display: flex;
+    /* border: 2px solid rgb(0, 255, 4); */
+
 }
 
 /* ============ burger menu ============== */

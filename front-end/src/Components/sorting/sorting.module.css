@@ -1,9 +1,12 @@
 .wrapper{
     margin-left: 5%;
     display: flex;
+    gap: 5%;
     margin-bottom: 1%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    margin: 0 auto;
+    /* border: 1px solid orange; */
 }
 .price{
     display: flex;
