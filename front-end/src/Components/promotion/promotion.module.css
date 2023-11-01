@@ -10,10 +10,8 @@
 }
 
 .cardProduct{
-    /* border: 2px solid blue; */
     display: flex;
     width: 318px;
-    /* height: 366px; */
     flex-direction: column;
 }
 /* ======== PagePromotion ========= */

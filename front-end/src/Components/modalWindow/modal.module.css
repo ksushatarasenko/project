@@ -57,7 +57,6 @@
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s;
-    border: 2px solid red;
     overflow:auto;
   }
 
@@ -66,8 +65,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 1%;
     border-radius: 15px;
-    width: 80%;
-    border: 2px solid rgb(35, 10, 110);
+    width: 100%;
     max-height: 700px;
     margin: 20px auto;
     overflow-y:auto;
@@ -78,9 +76,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 10px; /* Высота, которую вы хотите для закругленных углов внизу */
-    border-radius: 0 0 15px 15px; /* Закругленные углы снизу */
-    background: inherit; /* Оставляем фон, который унаследован от .content */
+    height: 10px; 
+    border-radius: 0 0 15px 15px;
+    background: inherit; 
 }
   .prodText{
     max-width: 100%;
@@ -92,25 +90,29 @@
   }
 
   .btnContainer{
-    display: flex;
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: 120px 120px;
     justify-content: space-around;
-    margin: 5px;
-    
+    margin: 5px ;  
   }
   
   .btnAllProduct, .btnAllProductToCart{
     border-radius: 15px;
     padding: 5px;
-    width: 150px;
-    height: 30px;
+    width: 100px;
+    height: 40px;
     border: 1px solid green;
      
   }
   .btnAllProduct, .btnAllProductToCart:hover{
     transform: scale(0.9);
+    
   }
   .btnAllProductToCart{
-      background-color: green;   
+      background-color: green; 
+      border: none;  
+      color: white;
     }
   .p{
     color: black;
@@ -130,7 +132,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 15%;
       }
       .btnAllProductToCart{
         width: 140px;
@@ -139,5 +140,8 @@
       .p{
         font-size: 20px;
         line-height: 20px;
+      }
+      .prodContent{
+        width: 275px;
       }
     }

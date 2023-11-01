@@ -57,10 +57,7 @@ function Header () {
               <NavLink to='/promotion' className={({isActive})=> isActive ? 'active' : ''}>All salies</NavLink>             
             </div>
             
-        </div>
-       
-        
-           
+        </div>           
       </div>
     </div>
   );

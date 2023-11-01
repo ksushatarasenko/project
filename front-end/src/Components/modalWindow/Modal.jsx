@@ -1,14 +1,12 @@
 import React from 'react';
 
-
 const Modal = ({ children, wrapperClassName,
           contentClassName,
           textClassName,
           btnClassName,
           isModalOpen,
           setIsModalOpen}) => {
-
-            
+           
   const closeModal = () => {
     console.log("closeModal called");
     setIsModalOpen(false);

@@ -74,7 +74,6 @@
     }
     .text{
         display: flex;
-        /* border: 2px solid green; */
         margin-top: 10px;
         gap: 10px;
         height: 150px;
@@ -82,7 +81,6 @@
     }
     .img{
         max-width: 100%;
-        /* border: 2px solid red; */
         margin-top: -30%;
         justify-content: center;
         align-items: center;
@@ -105,7 +103,6 @@
     }
     .btn a{
         font-size: 18px;
-        /* text-align: center; */
     }
     .text{
         flex-direction: column;

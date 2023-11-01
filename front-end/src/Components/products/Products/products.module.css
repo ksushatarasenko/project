@@ -3,7 +3,6 @@
     flex-wrap: wrap;
     gap: 35px;
     justify-content: center;
-    /* border: 2px solid pink; */
 }
 
 .price{
@@ -14,7 +13,6 @@
 }
 
 .card{
-    /* border: 1px solid green; */
     width: 318px;
     padding: 20px;
 }

@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 
 
 const PagePromotion = observer(() => {
-  const {products, isLoading, getAllProducts} = productsStore;
+  const {products, getAllProducts} = productsStore;
   const {sortedProducts} = sortingStore;
   const location = useLocation();
     

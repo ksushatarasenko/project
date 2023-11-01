@@ -76,14 +76,6 @@ async sendCoupon (phoneNumber){
     throw error;
   }
 }
-
-
-//   setIsModalOpen = () => {
-//       this.isModalOpen = true;
-//    }
-//   setIsModalClose = () => {
-//     this.isModalOpen = false;
-//  }
     
 }
 

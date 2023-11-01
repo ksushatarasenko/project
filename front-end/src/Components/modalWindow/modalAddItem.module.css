@@ -1,7 +1,6 @@
 .wrapper{
     width: 100%;
     height: 100%;
-   
 }
 
 .image img{
@@ -26,7 +25,6 @@ image{
     display: flex;
     gap: 3%;
     margin: 1%;
-    /* height: 110px; */
     padding: 2%;
 }
 
@@ -108,12 +106,12 @@ image{
 .p{
     font-weight: 600;
     font-size: 20px;
+    padding: 10px;
 }
 
 @media(max-width:396px){
     .item{
         flex-direction: column;
-        /* flex-wrap: wrap; */
         position: relative;
     }
     .delete{

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import sortingStore from '../../store/sorting/sortingStore'
 import sort from './sorting.module.css'
-// import allProducts from '../../store/productsStore'
 
 
 const DropdownSorting = observer(({products}) => {

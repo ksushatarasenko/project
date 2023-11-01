@@ -1,11 +1,9 @@
 .container{
     display: flex;
     justify-content: space-between;
-    /* border: 2px solid blue; */
 }
 .wrapper{
     margin-top: 7%;
-    /* border: 2px solid red; */
     padding: 2%;
 }
 .socMedia{
@@ -13,8 +11,6 @@
     gap: 50px;
     margin-top: 7%;
     margin-left: 10px;
-    /* border: 2px solid blue; */
-    
 }
 
 .adress a{
@@ -41,7 +37,6 @@
 .map{
    margin-top: 40px;
     width: 100%;
-    /* border: 2px solid salmon; */
 }
 
 .h2{
@@ -56,7 +51,6 @@
     transform: scale(0.9);
 }
 .icon img{
-   /* border: 2px solid green; */
     width: 44px;
     margin-left: 25%;
 }
@@ -90,7 +84,6 @@
 @media (max-width: 590px){
     .container{
         flex-direction: column;
-        /* justify-content: center; */
         align-items: center;
         gap: 50px;
     }
