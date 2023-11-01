@@ -68,7 +68,7 @@ const closeModal = () => {
            <InputMask
                 mask="+4 999 999 99 99"
                 maskChar="_"
-                type="text"
+                type="tel"
                 placeholder="+49"
                 className={disc.input} 
                 onChange={handleInputChange}
@@ -91,7 +91,8 @@ const closeModal = () => {
                 contentClassName={modal.content}
                 textClassName={modal.text}
                 btnClassName={modal.btn}>
-                  <div className={modal.wrapper}>
+               
+                  <div className={modal.wrapper} >
                     <div className={modal.contentDiscount}>     
                         <div className={modal.text}>
                             {success && <p className={modal.p}>{success}</p>}
