@@ -83,8 +83,8 @@ const OrderDetalis = observer(() => {
                 <div className={order.formContainer}>
                     <InputMask
                         mask="+4 999 999 99 99"
-                        maskChar=" "
-                        type="text"
+                        maskChar="_"
+                        type="tel"
                         placeholder="Phone number"
                         className={order.input}
                         onChange={handleInputChange}

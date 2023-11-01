@@ -67,7 +67,7 @@ const closeModal = () => {
       <form className={disc.form}>
            <InputMask
                 mask="+4 999 999 99 99"
-                maskChar=" "
+                maskChar="_"
                 type="text"
                 placeholder="+49"
                 className={disc.input} 
