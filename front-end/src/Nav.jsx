@@ -24,12 +24,11 @@ const Nav = observer(() => {
                 <img src={order} alt="order" className={({isActive})=> isActive ? 'active' : ''}/>
                 <div>
                   {cartStore.totalCount > 0 ? (
-                  <p className='cart_p'>Items  in cart: {cartStore.totalCount}</p>
+                  <div className={header.cart_count}>{cartStore.totalCount}</div>
                   ) : (
-                    <p>Your cart is empty</p>
+                    <p className={header.p}>Your cart is empty</p>
                   )}
-                </div>
-                
+                </div>              
             </div>
             
           </NavLink>    

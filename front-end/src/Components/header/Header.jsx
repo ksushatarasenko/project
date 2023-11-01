@@ -30,29 +30,33 @@ function Header () {
       
 {/* ===== burger menu ========== */}
       <div className={header.burger_menu_container} >
-        <div className={header.cart}>    
-            <Link to='/order'>
+        <div className={header.burger_order}>  
+          <div>
+          <Link to='/order'>
                 <img src={order} alt="order" />
-                {cartStore.totalCount > 0 ? (
-                <p className='cart_p'>Items in cart: {cartStore.totalCount}</p>
-              ) : (
-                <p className='cart_p'>Your cart is empty</p>
-              )}
+                <div>
+                  {cartStore.totalCount > 0 ? (
+                  <div className={header.cart_count}>{cartStore.totalCount}</div>
+                  ) : (
+                    <p className={header.p}>Your cart is empty</p>
+                  )}
+                </div>
             </Link> 
+          </div>  
+          <div className={header.burger_icon} onClick={handleClick}>         
+              <img src={burger_icon} alt="" />       
+          </div>
+           
         </div>
 
-        <div className={header.burger_menu}>
-            <div className={header.burger_icon} onClick={handleClick}>         
-                <img src={burger_icon} alt="" />       
-            </div>
-           
+        <div className={header.burger_menu}>          
             <div className={header.navbar}
                 ref={navbarRef}>
               <NavLink to='/' className={({isActive})=> isActive ? 'active' : ''}>Main Page</NavLink>
               <NavLink to='/products/all' className={({isActive})=> isActive ? 'active' : ''}>All products</NavLink>
-              <NavLink to='/promotion' className={({isActive})=> isActive ? 'active' : ''}>All salies</NavLink>
-              
+              <NavLink to='/promotion' className={({isActive})=> isActive ? 'active' : ''}>All salies</NavLink>             
             </div>
+            
         </div>
        
         
