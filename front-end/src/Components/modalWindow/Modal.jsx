@@ -1,8 +1,14 @@
 import React from 'react';
 
 
-const Modal = ({ children, wrapperClassName, isModalOpen, setIsModalOpen}) => {
+const Modal = ({ children, wrapperClassName,
+          contentClassName,
+          textClassName,
+          btnClassName,
+          isModalOpen,
+          setIsModalOpen}) => {
 
+            
   const closeModal = () => {
     console.log("closeModal called");
     setIsModalOpen(false);
@@ -18,8 +24,8 @@ const Modal = ({ children, wrapperClassName, isModalOpen, setIsModalOpen}) => {
 };
 
   return isModalOpen ? (
-    <div className={wrapperClassName} onClick={overlayClick}>     
-        {children }
+    <div className={wrapperClassName} onClick={overlayClick}>
+      {children}
     </div>
   ) : null;
 };

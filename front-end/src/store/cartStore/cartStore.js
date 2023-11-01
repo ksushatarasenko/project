@@ -7,7 +7,6 @@ class CartStore {
   totalCount = 0;
   isLoading = false;
   amountPrice = 0;
-  isModalOpen = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,13 +39,7 @@ class CartStore {
     this.saveLocalStorage(); 
     this.amountOrderPrice();
   }
-// ============
-setIsModalOpen = () => {
-  this.isModalOpen = true;
-}
-setIsModalClose = () => {
-this.isModalOpen = false;
-}
+
 // ===========
   increment(productId){
     const index = this.items.findIndex(item => item.product.id === productId);

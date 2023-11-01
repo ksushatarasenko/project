@@ -9,17 +9,13 @@ import InputMask from 'react-input-mask';
 
 // =========== Orders detalis ()==================
 const OrderDetalis = observer(() => {
-    const { 
-        placeOrder, 
-        setClearCart,
-        isModalOpen,
-        setIsModalOpen, 
-        setIsModalClose} = cartStore;
+    const { placeOrder, setClearCart} = cartStore;
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [isTouched, setIsTouched] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     useEffect(() => {
@@ -37,30 +33,29 @@ const OrderDetalis = observer(() => {
         } else {
           setIsValidPhoneNumber(true); 
         }   
-        console.log('status phone =>', isValidPhoneNumber)
       };
     
     const handlePost =  (e) =>{
         e.preventDefault();
         if (isValidPhoneNumber && cartStore.items.length > 0) {
                 placeOrder();
-                setIsModalOpen();
+                setIsModalOpen(true);
                 setSuccess("The order has been sent. Thank you for the order!")                   
                 localStorage.clear();
                 setClearCart(); 
                 setPhoneNumber('');                         
         } else if(isValidPhoneNumber && cartStore.items.length <= 0){
-            setIsModalOpen();
+            setIsModalOpen(true);
             setError("There is no item in the cart. Do you want to choose to view the catalogue?");
             setPhoneNumber('')
         } else if (!isValidPhoneNumber && cartStore.items.length > 0){
-            setIsModalOpen()
+            setIsModalOpen(true)
             setError('"Incorrect phone number entered"')            
         }            
     }
 
       const closeModal = () => {   
-        setIsModalClose(); 
+        setIsModalOpen(false); 
         setError('');
         setSuccess('');        
       }
@@ -103,10 +98,9 @@ const OrderDetalis = observer(() => {
                         isModalOpen={isModalOpen}
                         setIsModalOpen = {() => setIsModalOpen(false)}
                         wrapperClassName={modal.wrapper}
-                        contentClassName={modal.content}
+                        contentClassName={modal.contentDiscount}
                         textClassName={modal.text}
                         btnClassName={modal.btn}>
-                        <div className={modal.wrapper}>
                             <div className={modal.contentDiscount}>     
                                 <div className={modal.text}>
                                     {success && <p className={modal.p}>{success}</p>}
@@ -116,7 +110,6 @@ const OrderDetalis = observer(() => {
                                     <button onClick={closeModal} className={modal.btn}>Close</button>  
                                 </div>
                             </div>
-                        </div>
                     </Modal>
                     )}                   
         </div>                  

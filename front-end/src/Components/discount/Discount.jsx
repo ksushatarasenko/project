@@ -14,13 +14,9 @@ const Discount = observer  (() =>{
   const [success, setSuccess] = useState('');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
-  
-  const {
-      isModalOpen, 
-      setIsModalOpen, 
-      setIsModalClose,
-      sendCoupon, 
-      } = productsStore;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {sendCoupon} = productsStore;
 
   const handleInputChange = (e) => {
     setIsTouched(true);
@@ -52,9 +48,10 @@ console.log("phone =>>", phoneNumber)
 
 
 const closeModal = () => {   
-  setIsModalClose(); 
+  setIsModalOpen(false); 
   setSuccess('')  
 }
+
   return (
     <div className={disc.wrapper}>
       <div className={disc.img}>
@@ -85,24 +82,24 @@ const closeModal = () => {
       </form>
       {setIsModalOpen &&(
             <Modal
-                isModalOpen={isModalOpen}
-                setIsModalOpen = {() => setIsModalOpen(false)}
-                wrapperClassName={modal.wrapper}
-                contentClassName={modal.content}
-                textClassName={modal.text}
-                btnClassName={modal.btn}>
-               
-                  <div className={modal.wrapper} >
-                    <div className={modal.contentDiscount}>     
-                        <div className={modal.text}>
-                            {success && <p className={modal.p}>{success}</p>}
-                        </div>
-                        <div>
-                            <button onClick={closeModal} className={modal.btn}>Close</button>  
-                        </div>
-                    </div>
-                  </div>
-              </Modal>
+            isModalOpen={isModalOpen}
+            setIsModalOpen={closeModal}
+            wrapperClassName={modal.wrapper}
+            contentClassName={modal.content}
+            textClassName={modal.text}
+            btnClassName={modal.btn}
+          >
+            <div className={modal.contentDiscount}>
+              <div className={modal.text}>
+                {success && <p className={modal.p}>{success}</p>}
+              </div>
+              <div>
+                <button onClick={closeModal} className={modal.btn}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </Modal>
         )}
     </div>
   )
