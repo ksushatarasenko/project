@@ -20,12 +20,12 @@ jobs:
 
       - name: Install dependencies and build frontend
         run: |
-          cd frontend
+          cd front-end
           npm install
           npm run build
 
       - name: Install dependencies and run backend
         run: |
-          cd ../backend
+          cd ../telran_project_backend-master
           npm install
           npm run dev
