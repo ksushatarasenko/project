@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, HashRouter } from 'react-router-dom';
 import Header from './Components/header/Header'; 
 import Order from './Components/order/Order';
 import SingleProduct from './Components/products/Products/SingleProduct';
@@ -16,7 +16,7 @@ import PagePromotion from './Components/promotion/PagePromotion';
 function App() {
   return (
     <div className='wrapper'>
-      <Router>
+      <HashRouter>
         <Header /> 
         <Routes>
           <Route path='/' element={<div><Home /></div>} />
@@ -29,7 +29,7 @@ function App() {
           <Route path='*' element={<NotFound/>}/>
         </Routes>
         <Footer/>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
