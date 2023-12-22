@@ -3,38 +3,27 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - main  # или ваша основная ветка
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
 
-      # - name: Install dependencies and build frontend
-      #   run: |
-      #     cd front-end
-      #     npm install
-      #     npm run build
+    - name: Install dependencies
+      run: npm install
 
-      # - name: Install dependencies and run backend
-      #   run: |
-      #     cd ../telran_project_backend-master
-      #     npm install
-      #     npm run dev
-      - name: Install dependencies
-         run: npm install
-
-      - name: Build and deploy
-        run: |
-          npm run build
-          npx gh-pages -d build
-        env:
-          CI: true
+    - name: Build and deploy
+      run: |
+        npm run build
+        npx gh-pages -d build
+      env:
+        CI: true
